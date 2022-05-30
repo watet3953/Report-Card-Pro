@@ -1,4 +1,3 @@
-(NEEDS TO BE REVIEWED)
 
 **The Purpose or Reason for Doing the Project**
 
