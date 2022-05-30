@@ -50,4 +50,5 @@ Handles the styling and printing of report cards
 
 -Written conditional support for user? (when mark less than 50, write X)
 
+![image](https://user-images.githubusercontent.com/106386185/170998110-5ff3b5ec-bcdb-43bc-937d-3804c8e392f0.png)
 
