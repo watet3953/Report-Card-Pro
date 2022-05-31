@@ -42,7 +42,9 @@ Other fields able to be added during use?
 Functions:
 
 -on button press, given a file, read data into the proper boxes
--on button pres, given data from boxes, write data into a file
+
+-on button press, given data from boxes, write data into a file
+
 -autofill capabilities for some boxes?
 
 
@@ -57,7 +59,9 @@ Doing calculations and bulk edits of files.
 
 
 Functions:
+
 -on button press, given a set of files with a shared class name, return the average grade of the class
+
 -on button press, given a set of files, possibly filtered by a property name, edit and save a property on all files.
 
 **Print**
@@ -71,8 +75,11 @@ Handles the styling and printing of report cards
 
 
 Functions:
+
 -on button press, given a file, read it in and apply it to a format
+
 -on button press, Given an edited format, save it to a format specific file (?)
+
 -on button press, given a file and a format (possibly already loaded into the program), convert it to a printable format and save/print.
 
 **File**
