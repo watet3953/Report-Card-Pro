@@ -57,6 +57,7 @@ Doing calculations and bulk edits of files.
 
 -Edit all instances of a class
 
+-Allow users to load their own scripts to modify files (?)
 
 Functions:
 
