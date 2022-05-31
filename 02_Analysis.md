@@ -97,5 +97,8 @@ Credit1,
 Average1, 
 Attendance1(?)
 
+A Vague outline of the things required by each section
 ![image](https://user-images.githubusercontent.com/106386185/170998110-5ff3b5ec-bcdb-43bc-937d-3804c8e392f0.png)
 
+A rough outline of the layout shared between all tabs
+![image](https://user-images.githubusercontent.com/106386185/171174493-4b446d63-49d3-4845-8499-a59086bd4734.png)
