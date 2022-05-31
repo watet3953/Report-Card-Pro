@@ -80,7 +80,7 @@ Functions:
 
 -on button press, Given an edited format, save it to a format specific file (?)
 
--on button press, given a file and a format (possibly already loaded into the program), convert it to a printable format and save/print.
+-on button press, given a file and a format (possibly already loaded into the program), convert it to a printable format and save/print. (via openable menu)
 
 **File**
 Comma Seperated Value (.csv) file
