@@ -101,14 +101,14 @@ A Vague outline of the things required by each section
 ![image](https://user-images.githubusercontent.com/106386185/170998110-5ff3b5ec-bcdb-43bc-937d-3804c8e392f0.png)
 
 A rough outline of the layout shared between all tabs
-![image](https://user-images.githubusercontent.com/106386185/171174493-4b446d63-49d3-4845-8499-a59086bd4734.png)
+![image](https://user-images.githubusercontent.com/106386185/171179999-59314142-c874-4a35-b00f-1593bf12793e.png)
 
 The Input Tab
-![image](https://user-images.githubusercontent.com/106386185/171175614-aafb8500-4a5c-43f9-b2ee-7747bc1aec92.png)
+![image](https://user-images.githubusercontent.com/106386185/171180334-c07c145b-dd8a-4702-94ae-ec3f0f4a81ba.png)
 
 The Process Tab
-![image](https://user-images.githubusercontent.com/106386185/171178135-41bd55e9-f797-4f38-ad2e-dcc09be91c45.png)
+![image](https://user-images.githubusercontent.com/106386185/171180548-4f0f37ab-36f3-4caf-84ff-daad93a05323.png)
 
 The Print Tab
-![image](https://user-images.githubusercontent.com/106386185/171179294-b9b3bfe6-9f12-4093-a8b3-43e59e4d448e.png)
+![image](https://user-images.githubusercontent.com/106386185/171180789-8b5b3595-c9c5-4361-aa4b-a65652a8a355.png)
 
