@@ -106,3 +106,5 @@ A rough outline of the layout shared between all tabs
 The Input Tab
 ![image](https://user-images.githubusercontent.com/106386185/171175614-aafb8500-4a5c-43f9-b2ee-7747bc1aec92.png)
 
+The Process Tab
+![image](https://user-images.githubusercontent.com/106386185/171178135-41bd55e9-f797-4f38-ad2e-dcc09be91c45.png)
