@@ -102,3 +102,7 @@ A Vague outline of the things required by each section
 
 A rough outline of the layout shared between all tabs
 ![image](https://user-images.githubusercontent.com/106386185/171174493-4b446d63-49d3-4845-8499-a59086bd4734.png)
+
+The Input Tab
+![image](https://user-images.githubusercontent.com/106386185/171175614-aafb8500-4a5c-43f9-b2ee-7747bc1aec92.png)
+
