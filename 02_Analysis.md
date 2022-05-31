@@ -108,3 +108,7 @@ The Input Tab
 
 The Process Tab
 ![image](https://user-images.githubusercontent.com/106386185/171178135-41bd55e9-f797-4f38-ad2e-dcc09be91c45.png)
+
+The Print Tab
+![image](https://user-images.githubusercontent.com/106386185/171179294-b9b3bfe6-9f12-4093-a8b3-43e59e4d448e.png)
+
