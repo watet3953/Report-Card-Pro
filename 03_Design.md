@@ -1,8 +1,8 @@
 For the purposes of the table:
 
-[x] is a positive integer representing some duplicatible part
-[sn] is the name of an added script
-[sv] is the name of a value from an added script
+[x] is a positive integer representing some duplicatible part,
+[sn] is the name of an added script,
+and [sv] is the name of a value from an added script
 
 |Type of Component|Purpose                          |Value            |Variable Name    |
 |-----------------|---------------------------------|-----------------|-----------------|
