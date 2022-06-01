@@ -1,8 +1,8 @@
-For the purposes of the table:
+For the purposes of the table:  
 
-[x] is a positive integer representing some duplicatible part,
-[sn] is the name of an added script,
-and [sv] is the name of a value from an added script
+[x] is a positive integer representing some duplicatible part  
+[sn] is the name of an added script  
+and [sv] is the name of a value from an added script  
 
 |Type of Component|Purpose                          |Value            |Variable Name    |
 |-----------------|---------------------------------|-----------------|-----------------|
@@ -36,3 +36,34 @@ and [sv] is the name of a value from an added script
 |JComboBox        |List of Print Formats            |N/A              |jCBFormats       |
 |JButton          |Saves Format Layout              |"Save Format"    |jBttnSaveFormat  |
 |JFrame           |Holds the Preview for the Format |N/A              |jFramePreview    |
+
+
+Function Pseudocode:    
+
+
+-Retrieving Data    
+
+
+(assumes specific file already located)  
+load file into scanner  
+for each value in first row  
+  look for variable in code, if not found then skip (possibly throw soft error)  
+  store variable reference  
+for each value next row  
+  compare position in row to variable reference  
+  if variable reference is good, set variable to value  
+do not read subsequint lines, exit after second line    
+
+-Lookup student by name
+
+
+-Adding student to file
+
+
+-modifying student data
+
+
+-deleting quote from file
+
+
+-calculate average
