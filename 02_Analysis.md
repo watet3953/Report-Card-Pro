@@ -87,6 +87,8 @@ Comma Seperated Value (.csv) file
 
 Loaded on Load press, written locally to variables, comitted to file on Save press.
 
+
+File name is student ID
 FirstName, 
 LastName, 
 Average, 
@@ -104,7 +106,7 @@ A rough outline of the layout shared between all tabs
 ![image](https://user-images.githubusercontent.com/106386185/171179999-59314142-c874-4a35-b00f-1593bf12793e.png)
 
 The Input Tab
-![image](https://user-images.githubusercontent.com/106386185/171180334-c07c145b-dd8a-4702-94ae-ec3f0f4a81ba.png)
+![image](https://user-images.githubusercontent.com/106386185/171401623-845212f2-1774-4b7d-955f-4d5dfbd72d5c.png)
 
 The Process Tab
 ![image](https://user-images.githubusercontent.com/106386185/171180548-4f0f37ab-36f3-4caf-84ff-daad93a05323.png)
