@@ -56,14 +56,36 @@ do not read subsequint lines, exit after second line
 
 -Lookup student by name
 
+(could be more efficient with a lookup table, will be considered if sufficiently slow)  
+for each student file  
+  read in name fields from file  
+  compare to requested name  
+  if the same, return the id of the file  
+if no name is the same, return a 0  
 
 -Adding student to file
+
+get student id  
+if a file already exists under the id name, push prompt to screen  
+if prompt accepted or file doesn't exist  
+  for each variable field name to be uploaded
+    write to file's first line, seperated by comma  
+  for each variable field to be uploaded  
+    write to file's second line, in the same order as variable names  
+return indicator of success (boolean, true false)  
 
 
 -modifying student data
 
-
--deleting quote from file
-
+(user loads data (see retrieving data)  
+(user modifies text fields)  
+(user saves data (see adding student to file)  
 
 -calculate average
+
+for each file  
+  if a filter variable exists, check file for filter variable, if not included then discard file from loop  
+  store file ID in array
+  get file's mark field for class, write to arraylist (possibly rolling average if too resource intensive)  
+  calculate average from all values in arraylist
+  write average value to all file IDs in array
