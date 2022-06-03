@@ -29,6 +29,19 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jTabbedPane = new javax.swing.JTabbedPane();
         jFrameInput = new javax.swing.JPanel();
+        jTFNameFirst = new javax.swing.JTextField();
+        jTFNameLast = new javax.swing.JTextField();
+        jTFSemester = new javax.swing.JTextField();
+        jTFAverage = new javax.swing.JTextField();
+        jTFID = new javax.swing.JTextField();
+        jFrameClass0 = new javax.swing.JPanel();
+        jTFClass0 = new javax.swing.JTextField();
+        jTFMark0 = new javax.swing.JTextField();
+        jTFCredit0 = new javax.swing.JTextField();
+        jTFAverage0 = new javax.swing.JTextField();
+        jTFAttendance0 = new javax.swing.JTextField();
+        jTFComments0 = new javax.swing.JTextField();
+        jBttnRemove0 = new javax.swing.JButton();
         jFrameProcess = new javax.swing.JPanel();
         jFramePrint = new javax.swing.JPanel();
         jFrameTop = new javax.swing.JPanel();
@@ -42,16 +55,109 @@ public class ReportCardProUI extends javax.swing.JFrame {
 
         jTabbedPane.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
 
+        jTFNameFirst.setText("First Name");
+
+        jTFNameLast.setText("Last Name");
+
+        jTFSemester.setText("Semester");
+
+        jTFAverage.setEditable(false);
+        jTFAverage.setText("Average");
+
+        jTFID.setText("Student ID");
+
+        jFrameClass0.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jTFClass0.setText("Class 0");
+
+        jTFMark0.setText("Mark 0");
+
+        jTFCredit0.setText("Credit 0");
+
+        jTFAverage0.setEditable(false);
+        jTFAverage0.setText("Average 0");
+
+        jTFAttendance0.setText("Attendance 0");
+
+        jTFComments0.setText("Comments 0");
+
+        jBttnRemove0.setText("Remove Class");
+
+        javax.swing.GroupLayout jFrameClass0Layout = new javax.swing.GroupLayout(jFrameClass0);
+        jFrameClass0.setLayout(jFrameClass0Layout);
+        jFrameClass0Layout.setHorizontalGroup(
+            jFrameClass0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFrameClass0Layout.createSequentialGroup()
+                .addComponent(jTFClass0, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFMark0, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFCredit0, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFAverage0, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFAttendance0, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFComments0, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBttnRemove0)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jFrameClass0Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTFAttendance0, jTFAverage0, jTFClass0, jTFComments0, jTFCredit0, jTFMark0});
+
+        jFrameClass0Layout.setVerticalGroup(
+            jFrameClass0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFrameClass0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jTFClass0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTFMark0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTFCredit0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTFAverage0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTFAttendance0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTFComments0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBttnRemove0))
+        );
+
         javax.swing.GroupLayout jFrameInputLayout = new javax.swing.GroupLayout(jFrameInput);
         jFrameInput.setLayout(jFrameInputLayout);
         jFrameInputLayout.setHorizontalGroup(
             jFrameInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 414, Short.MAX_VALUE)
+            .addGroup(jFrameInputLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jFrameInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jFrameClass0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jFrameInputLayout.createSequentialGroup()
+                        .addComponent(jTFNameFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTFNameLast, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTFSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTFAverage, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTFID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
+
+        jFrameInputLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTFAverage, jTFID, jTFNameFirst, jTFNameLast, jTFSemester});
+
         jFrameInputLayout.setVerticalGroup(
             jFrameInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addGroup(jFrameInputLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jFrameInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFNameFirst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFNameLast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFSemester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFAverage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jFrameClass0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(235, Short.MAX_VALUE))
         );
+
+        jFrameInputLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTFAverage, jTFID, jTFNameFirst, jTFNameLast, jTFSemester});
 
         jTabbedPane.addTab("Input", jFrameInput);
 
@@ -59,7 +165,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jFrameProcess.setLayout(jFrameProcessLayout);
         jFrameProcessLayout.setHorizontalGroup(
             jFrameProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 414, Short.MAX_VALUE)
+            .addGap(0, 661, Short.MAX_VALUE)
         );
         jFrameProcessLayout.setVerticalGroup(
             jFrameProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,7 +178,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jFramePrint.setLayout(jFramePrintLayout);
         jFramePrintLayout.setHorizontalGroup(
             jFramePrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 414, Short.MAX_VALUE)
+            .addGap(0, 661, Short.MAX_VALUE)
         );
         jFramePrintLayout.setVerticalGroup(
             jFramePrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,12 +198,15 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jFrameTopLayout.setHorizontalGroup(
             jFrameTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jFrameTopLayout.createSequentialGroup()
-                .addComponent(jLblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBttnLoad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBttnLoad)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBttnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jBttnSave))
         );
+
+        jFrameTopLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jBttnLoad, jBttnSave});
+
         jFrameTopLayout.setVerticalGroup(
             jFrameTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFrameTopLayout.createSequentialGroup()
@@ -168,13 +277,26 @@ public class ReportCardProUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBttnLoad;
+    private javax.swing.JButton jBttnRemove0;
     private javax.swing.JButton jBttnSave;
     private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jFrameClass0;
     private javax.swing.JPanel jFrameInput;
     private javax.swing.JPanel jFramePrint;
     private javax.swing.JPanel jFrameProcess;
     private javax.swing.JPanel jFrameTop;
     private javax.swing.JLabel jLblTitle;
+    private javax.swing.JTextField jTFAttendance0;
+    private javax.swing.JTextField jTFAverage;
+    private javax.swing.JTextField jTFAverage0;
+    private javax.swing.JTextField jTFClass0;
+    private javax.swing.JTextField jTFComments0;
+    private javax.swing.JTextField jTFCredit0;
+    private javax.swing.JTextField jTFID;
+    private javax.swing.JTextField jTFMark0;
+    private javax.swing.JTextField jTFNameFirst;
+    private javax.swing.JTextField jTFNameLast;
+    private javax.swing.JTextField jTFSemester;
     private javax.swing.JTabbedPane jTabbedPane;
     // End of variables declaration//GEN-END:variables
 }

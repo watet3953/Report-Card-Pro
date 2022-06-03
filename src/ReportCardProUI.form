@@ -67,15 +67,156 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="414" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jFrameClass0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jTFNameFirst" linkSize="2" min="-2" pref="75" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTFNameLast" linkSize="2" min="-2" pref="82" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTFSemester" linkSize="2" min="-2" pref="53" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTFAverage" linkSize="2" min="-2" pref="51" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTFID" linkSize="2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="299" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jTFNameFirst" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFNameLast" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFSemester" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFAverage" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFID" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jFrameClass0" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="235" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JTextField" name="jTFNameFirst">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="First Name"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTFNameLast">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Last Name"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTFSemester">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Semester"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTFAverage">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="text" type="java.lang.String" value="Average"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTFID">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Student ID"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JPanel" name="jFrameClass0">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                    <EtchetBorder/>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jTFClass0" linkSize="4" min="-2" pref="81" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jTFMark0" linkSize="4" min="-2" pref="82" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jTFCredit0" linkSize="4" min="-2" pref="82" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jTFAverage0" linkSize="4" min="-2" pref="82" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jTFAttendance0" linkSize="4" min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jTFComments0" linkSize="4" min="-2" pref="80" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jBttnRemove0" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jTFClass0" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFMark0" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFCredit0" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFAverage0" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFAttendance0" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFComments0" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jBttnRemove0" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JTextField" name="jTFClass0">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Class 0"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTFMark0">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Mark 0"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTFCredit0">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Credit 0"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTFAverage0">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="text" type="java.lang.String" value="Average 0"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTFAttendance0">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Attendance 0"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTFComments0">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Comments 0"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="jBttnRemove0">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Remove Class"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jFrameProcess">
           <Constraints>
@@ -89,7 +230,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="414" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="661" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -111,7 +252,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="414" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="661" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -129,11 +270,11 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jLblTitle" min="-2" pref="243" max="-2" attributes="0"/>
+                  <Component id="jLblTitle" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jBttnLoad" max="32767" attributes="0"/>
+                  <Component id="jBttnLoad" linkSize="5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jBttnSave" max="32767" attributes="0"/>
+                  <Component id="jBttnSave" linkSize="5" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
