@@ -43,6 +43,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jTFComments0 = new javax.swing.JTextField();
         jBttnRemove0 = new javax.swing.JButton();
         jFrameProcess = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jFramePrint = new javax.swing.JPanel();
         jFrameTop = new javax.swing.JPanel();
         jLblTitle = new javax.swing.JLabel();
@@ -161,15 +162,23 @@ public class ReportCardProUI extends javax.swing.JFrame {
 
         jTabbedPane.addTab("Input", jFrameInput);
 
+        jLabel1.setText("jLabel1");
+
         javax.swing.GroupLayout jFrameProcessLayout = new javax.swing.GroupLayout(jFrameProcess);
         jFrameProcess.setLayout(jFrameProcessLayout);
         jFrameProcessLayout.setHorizontalGroup(
             jFrameProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 661, Short.MAX_VALUE)
+            .addGroup(jFrameProcessLayout.createSequentialGroup()
+                .addGap(266, 266, 266)
+                .addComponent(jLabel1)
+                .addContainerGap(361, Short.MAX_VALUE))
         );
         jFrameProcessLayout.setVerticalGroup(
             jFrameProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addGroup(jFrameProcessLayout.createSequentialGroup()
+                .addGap(109, 109, 109)
+                .addComponent(jLabel1)
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Process", jFrameProcess);
@@ -285,6 +294,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
     private javax.swing.JPanel jFramePrint;
     private javax.swing.JPanel jFrameProcess;
     private javax.swing.JPanel jFrameTop;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLblTitle;
     private javax.swing.JTextField jTFAttendance0;
     private javax.swing.JTextField jTFAverage;
