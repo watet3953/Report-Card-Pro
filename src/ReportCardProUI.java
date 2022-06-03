@@ -28,6 +28,9 @@ public class ReportCardProUI extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jTabbedPane = new javax.swing.JTabbedPane();
+        jFrameInput = new javax.swing.JPanel();
+        jFrameProcess = new javax.swing.JPanel();
+        jFramePrint = new javax.swing.JPanel();
         jFrameTop = new javax.swing.JPanel();
         jLblTitle = new javax.swing.JLabel();
         jBttnSave = new javax.swing.JButton();
@@ -36,6 +39,47 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+
+        javax.swing.GroupLayout jFrameInputLayout = new javax.swing.GroupLayout(jFrameInput);
+        jFrameInput.setLayout(jFrameInputLayout);
+        jFrameInputLayout.setHorizontalGroup(
+            jFrameInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 414, Short.MAX_VALUE)
+        );
+        jFrameInputLayout.setVerticalGroup(
+            jFrameInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 299, Short.MAX_VALUE)
+        );
+
+        jTabbedPane.addTab("Input", jFrameInput);
+
+        javax.swing.GroupLayout jFrameProcessLayout = new javax.swing.GroupLayout(jFrameProcess);
+        jFrameProcess.setLayout(jFrameProcessLayout);
+        jFrameProcessLayout.setHorizontalGroup(
+            jFrameProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 414, Short.MAX_VALUE)
+        );
+        jFrameProcessLayout.setVerticalGroup(
+            jFrameProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 299, Short.MAX_VALUE)
+        );
+
+        jTabbedPane.addTab("Process", jFrameProcess);
+
+        javax.swing.GroupLayout jFramePrintLayout = new javax.swing.GroupLayout(jFramePrint);
+        jFramePrint.setLayout(jFramePrintLayout);
+        jFramePrintLayout.setHorizontalGroup(
+            jFramePrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 414, Short.MAX_VALUE)
+        );
+        jFramePrintLayout.setVerticalGroup(
+            jFramePrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 299, Short.MAX_VALUE)
+        );
+
+        jTabbedPane.addTab("Print", jFramePrint);
 
         jLblTitle.setText("Report Card Pro");
 
@@ -50,9 +94,9 @@ public class ReportCardProUI extends javax.swing.JFrame {
             .addGroup(jFrameTopLayout.createSequentialGroup()
                 .addComponent(jLblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBttnLoad, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                .addComponent(jBttnLoad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBttnSave, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
+                .addComponent(jBttnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jFrameTopLayout.setVerticalGroup(
             jFrameTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,8 +123,10 @@ public class ReportCardProUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jFrameTop, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE))
+                .addComponent(jTabbedPane))
         );
+
+        jTabbedPane.getAccessibleContext().setAccessibleName("jTabbedPane");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -124,6 +170,9 @@ public class ReportCardProUI extends javax.swing.JFrame {
     private javax.swing.JButton jBttnLoad;
     private javax.swing.JButton jBttnSave;
     private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jFrameInput;
+    private javax.swing.JPanel jFramePrint;
+    private javax.swing.JPanel jFrameProcess;
     private javax.swing.JPanel jFrameTop;
     private javax.swing.JLabel jLblTitle;
     private javax.swing.JTabbedPane jTabbedPane;
