@@ -351,9 +351,12 @@ public class ReportCardProUI extends javax.swing.JFrame {
     public String dataPath = "";
     
     private String queryDataPath() {
-        javax.swing.JOptionPane.showMessageDialog(null,"Test");
-        javax.swing.JFileChooser fc = new javax.swing.JFileChooser();
-        fc.showOpenDialog(null);
+        javax.swing.JOptionPane.showMessageDialog(null,"Please select the data folder.","Data Path Unspecified",1);
+        javax.swing.JFileChooser fc = new javax.swing.JFileChooser("");
+        fc.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+        if (fc.showOpenDialog(null) ==  javax.swing.JFileChooser.APPROVE_OPTION) {
+            return fc.getSelectedFile().getAbsolutePath();
+        }
         return "";
     }
     
@@ -361,7 +364,11 @@ public class ReportCardProUI extends javax.swing.JFrame {
         String studentID = jTFID.getText();
         if (dataPath.isEmpty()) {
             dataPath = queryDataPath();
+            if (dataPath.isEmpty()) {
+                return;
+            }
         }
+        System.out.println(dataPath);
     }//GEN-LAST:event_jBttnSaveActionPerformed
 
     /**
