@@ -25,6 +25,7 @@ and [sv] is the name of a value from an added script
 |JTextField       |Text Field for Class Attendance  |"Attendance [x]" |jTFAttendance[x] |
 |JTextField       |Text Field for Teacher Comments  |"Comments [x]"   |jTFComments[x]   |
 |JButton          |Remove Class Button              |"Remove Class"   |jBttnRemove[x]   |
+|JButton          |Add Class Button                 |"Add Class"      |jBttnAddClass    |
 |**JPanel (Tab)** |**Holds the Process Tab**        |**"Process"**    |**jFrameProcess**|
 |JPanel (Bordered)|Contains a single "script"'s I/O |"[sn]"           |jFrame[sn]       |
 |JTextField       |Holds a value that can be input  |"[sv]"           |jTF[sn][sv]      |
