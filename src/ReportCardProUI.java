@@ -44,7 +44,16 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jBttnRemove0 = new javax.swing.JButton();
         jBttnAddClass = new javax.swing.JButton();
         jFrameProcess = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jTFSNSV = new javax.swing.JTextField();
+        jBttnRunSN = new javax.swing.JButton();
+        jBttnAddScript = new javax.swing.JButton();
         jFramePrint = new javax.swing.JPanel();
+        jBttnPrintSave = new javax.swing.JButton();
+        jLblFormatType = new javax.swing.JLabel();
+        jCBFormats = new javax.swing.JComboBox<>();
+        jFramePreview = new javax.swing.JPanel();
+        jBttnSaveFormat = new javax.swing.JButton();
         jFrameTop = new javax.swing.JPanel();
         jLblTitle = new javax.swing.JLabel();
         jBttnSave = new javax.swing.JButton();
@@ -169,28 +178,114 @@ public class ReportCardProUI extends javax.swing.JFrame {
 
         jTabbedPane.addTab("Input", jFrameInput);
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("[SN]"));
+
+        jBttnRunSN.setText("\"Run Script\"");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jTFSNSV, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(255, 255, 255)
+                        .addComponent(jBttnRunSN, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(260, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTFSNSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(jBttnRunSN)
+                .addContainerGap())
+        );
+
+        jBttnAddScript.setText("\"Add Script\"");
+
         javax.swing.GroupLayout jFrameProcessLayout = new javax.swing.GroupLayout(jFrameProcess);
         jFrameProcess.setLayout(jFrameProcessLayout);
         jFrameProcessLayout.setHorizontalGroup(
             jFrameProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 661, Short.MAX_VALUE)
+            .addGroup(jFrameProcessLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jFrameProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jFrameProcessLayout.createSequentialGroup()
+                        .addComponent(jBttnAddScript, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jFrameProcessLayout.setVerticalGroup(
             jFrameProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addGroup(jFrameProcessLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBttnAddScript)
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Process", jFrameProcess);
+
+        jBttnPrintSave.setText("Print / Save");
+
+        jLblFormatType.setText("Format Type :");
+
+        jCBFormats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jFramePreview.setBorder(javax.swing.BorderFactory.createTitledBorder("Window"));
+
+        javax.swing.GroupLayout jFramePreviewLayout = new javax.swing.GroupLayout(jFramePreview);
+        jFramePreview.setLayout(jFramePreviewLayout);
+        jFramePreviewLayout.setHorizontalGroup(
+            jFramePreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 474, Short.MAX_VALUE)
+        );
+        jFramePreviewLayout.setVerticalGroup(
+            jFramePreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jBttnSaveFormat.setText("\"Save Format\"");
 
         javax.swing.GroupLayout jFramePrintLayout = new javax.swing.GroupLayout(jFramePrint);
         jFramePrint.setLayout(jFramePrintLayout);
         jFramePrintLayout.setHorizontalGroup(
             jFramePrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 661, Short.MAX_VALUE)
+            .addGroup(jFramePrintLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jFramePrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jFramePrintLayout.createSequentialGroup()
+                        .addComponent(jLblFormatType, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCBFormats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBttnSaveFormat, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBttnPrintSave, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(jFramePreview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jFramePrintLayout.setVerticalGroup(
             jFramePrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addGroup(jFramePrintLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jBttnPrintSave)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jFramePrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLblFormatType)
+                    .addComponent(jCBFormats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jBttnSaveFormat)
+                .addContainerGap(175, Short.MAX_VALUE))
+            .addGroup(jFramePrintLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jFramePreview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Print", jFramePrint);
@@ -232,7 +327,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane)
+            .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
             .addComponent(jFrameTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -285,16 +380,24 @@ public class ReportCardProUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBttnAddClass;
+    private javax.swing.JButton jBttnAddScript;
     private javax.swing.JButton jBttnLoad;
+    private javax.swing.JButton jBttnPrintSave;
     private javax.swing.JButton jBttnRemove0;
+    private javax.swing.JButton jBttnRunSN;
     private javax.swing.JButton jBttnSave;
+    private javax.swing.JButton jBttnSaveFormat;
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jCBFormats;
     private javax.swing.JPanel jFrameClass0;
     private javax.swing.JPanel jFrameInput;
+    private javax.swing.JPanel jFramePreview;
     private javax.swing.JPanel jFramePrint;
     private javax.swing.JPanel jFrameProcess;
     private javax.swing.JPanel jFrameTop;
+    private javax.swing.JLabel jLblFormatType;
     private javax.swing.JLabel jLblTitle;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTFAttendance0;
     private javax.swing.JTextField jTFAverage;
     private javax.swing.JTextField jTFAverage0;
@@ -305,6 +408,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTFMark0;
     private javax.swing.JTextField jTFNameFirst;
     private javax.swing.JTextField jTFNameLast;
+    private javax.swing.JTextField jTFSNSV;
     private javax.swing.JTextField jTFSemester;
     private javax.swing.JTabbedPane jTabbedPane;
     // End of variables declaration//GEN-END:variables
