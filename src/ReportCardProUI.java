@@ -293,6 +293,11 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jLblTitle.setText("Report Card Pro");
 
         jBttnSave.setLabel("Save");
+        jBttnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBttnSaveActionPerformed(evt);
+            }
+        });
 
         jBttnLoad.setText("Load");
 
@@ -342,6 +347,22 @@ public class ReportCardProUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public String dataPath = "";
+    
+    private String queryDataPath() {
+        javax.swing.JOptionPane.showMessageDialog(null,"Test");
+        javax.swing.JFileChooser fc = new javax.swing.JFileChooser();
+        fc.showOpenDialog(null);
+        return "";
+    }
+    
+    private void jBttnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnSaveActionPerformed
+        String studentID = jTFID.getText();
+        if (dataPath.isEmpty()) {
+            dataPath = queryDataPath();
+        }
+    }//GEN-LAST:event_jBttnSaveActionPerformed
 
     /**
      * @param args the command line arguments
