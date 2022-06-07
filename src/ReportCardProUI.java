@@ -360,14 +360,41 @@ public class ReportCardProUI extends javax.swing.JFrame {
         return "";
     }
     
+    private String[] returnContents(java.awt.Component object) {
+/*        if (object instanceof javax.swing.text.JTextComponent) {
+            return object.getText().split(""); // splitting string by nothing should yield an array of length 1
+        } else { try {
+                java.awt.Component[] objects = object.getComponents(); // does this need to be cast to a type that has this function?
+                String[] export = new String[objects.length]; // this needs to be an arraylist
+                for (byte x = 0; x < objects.length; x++) {
+                    export[x] = returnContents()
+                }
+            } catch (Exception e) {}
+        }
+*/  return null;  
+    }
+    
     private void jBttnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnSaveActionPerformed
-        String studentID = jTFID.getText();
+        // Get data path
         if (dataPath.isEmpty()) {
             dataPath = queryDataPath();
             if (dataPath.isEmpty()) {
                 return;
             }
         }
+        // check if file exists, prompt user if does
+        String studentID = jTFID.getText();
+        java.io.File studentFile = new java.io.File(dataPath, studentID + ".csv");
+        if (studentFile.canRead()) {
+           if (javax.swing.JOptionPane.showConfirmDialog(null,"Would you like to overwrite the existing file?","File Already Exists",1) == javax.swing.JOptionPane.NO_OPTION) {
+               return;
+           } 
+        }
+        //java.awt.Component[] inputchildren = 
+        // get list of variables to save
+        // for all children of the input pane, if
+        // write to file
+        // show prompt for success
         System.out.println(dataPath);
     }//GEN-LAST:event_jBttnSaveActionPerformed
 
