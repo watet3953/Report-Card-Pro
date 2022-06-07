@@ -390,7 +390,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
                return;
            } 
         }
-        java.awt.Component[] inputchildren = 
+        //java.awt.Component[] inputchildren = 
         // get list of variables to save
         // for all children of the input pane, if
         // write to file
