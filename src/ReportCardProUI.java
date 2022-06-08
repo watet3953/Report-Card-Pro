@@ -1,3 +1,18 @@
+
+// TODO: clean up imports
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.File;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.ArrayList;
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.text.JTextComponent;
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -351,27 +366,41 @@ public class ReportCardProUI extends javax.swing.JFrame {
     public String dataPath = "";
     
     private String queryDataPath() {
-        javax.swing.JOptionPane.showMessageDialog(null,"Please select the data folder.","Data Path Unspecified",1);
-        javax.swing.JFileChooser fc = new javax.swing.JFileChooser("");
-        fc.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
-        if (fc.showOpenDialog(null) ==  javax.swing.JFileChooser.APPROVE_OPTION) {
+        JOptionPane.showMessageDialog(null,"Please select the data folder.","Data Path Unspecified",1);
+        JFileChooser fc = new JFileChooser("");
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        if (fc.showOpenDialog(null) ==  JFileChooser.APPROVE_OPTION) {
             return fc.getSelectedFile().getAbsolutePath();
         }
         return "";
     }
     
-    private String[] returnContents(java.awt.Component object) {
-/*        if (object instanceof javax.swing.text.JTextComponent) {
-            return object.getText().split(""); // splitting string by nothing should yield an array of length 1
-        } else { try {
-                java.awt.Component[] objects = object.getComponents(); // does this need to be cast to a type that has this function?
-                String[] export = new String[objects.length]; // this needs to be an arraylist
+    private String[][] returnContents(Component object) { // this whole function has some nasty typecasting, but it should work
+        ArrayList<String> exportContent  = new ArrayList<>();
+        ArrayList<String> exportName  = new ArrayList<>();
+        
+        if (object instanceof JTextComponent) {
+            exportName.add(((JTextComponent)(object)).getName());
+            exportContent.add(((JTextComponent)(object)).getText());
+        }
+        if (object instanceof Container) {
+            try {
+                Component[] objects = ((Container)(object)).getComponents();
                 for (byte x = 0; x < objects.length; x++) {
-                    export[x] = returnContents()
+                    String[][] inFeed = returnContents(objects[x]);
+                    for (byte y = 0; y < inFeed[0].length; y++) {
+                        exportName.add(inFeed[0][y]);
+                        exportContent.add(inFeed[1][y]);
+                    }
                 }
             } catch (Exception e) {}
         }
-*/  return null;  
+    String[][] output = new String[2][exportContent.size()];
+    for (byte x = 0; x < output.length; x++) {
+        output[0][x] = exportName.get(x);
+        output[1][x] = exportContent.get(x);
+    }
+    return output;  
     }
     
     private void jBttnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnSaveActionPerformed
@@ -384,17 +413,41 @@ public class ReportCardProUI extends javax.swing.JFrame {
         }
         // check if file exists, prompt user if does
         String studentID = jTFID.getText();
-        java.io.File studentFile = new java.io.File(dataPath, studentID + ".csv");
+        File studentFile = new File(dataPath, studentID + ".csv");
         if (studentFile.canRead()) {
-           if (javax.swing.JOptionPane.showConfirmDialog(null,"Would you like to overwrite the existing file?","File Already Exists",1) == javax.swing.JOptionPane.NO_OPTION) {
+           if (JOptionPane.showConfirmDialog(null,"Would you like to overwrite the existing file?","File Already Exists",1) == javax.swing.JOptionPane.NO_OPTION) {
                return;
            } 
+        } else {
+            try {
+                studentFile.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        //java.awt.Component[] inputchildren = 
-        // get list of variables to save
-        // for all children of the input pane, if
-        // write to file
-        // show prompt for success
+        String[][] variables = returnContents(jFrameInput);
+        PrintWriter fileOut = null;
+        try {
+            fileOut = new PrintWriter(studentFile);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String line = "";
+        
+        for (byte x = 0; x < variables[0].length; x++) {
+         line.concat(variables[0][x] + ",");
+        }
+        
+        fileOut.write(line + "\n");
+        
+        line = "";
+        
+        for (byte x = 0; x < variables[1].length; x++) {
+            line.concat(variables[1][x] + ",");
+        }
+        
+        fileOut.write(line + "\n");
+        fileOut.close();
         System.out.println(dataPath);
     }//GEN-LAST:event_jBttnSaveActionPerformed
 
