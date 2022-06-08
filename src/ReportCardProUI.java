@@ -382,6 +382,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
         if (object instanceof JTextComponent) {
             exportName.add(((JTextComponent)(object)).getName());
             exportContent.add(((JTextComponent)(object)).getText());
+            System.out.println(((JTextComponent)(object)).getName());
         }
         if (object instanceof Container) {
             try {
@@ -396,7 +397,10 @@ public class ReportCardProUI extends javax.swing.JFrame {
             } catch (Exception e) {}
         }
     String[][] output = new String[2][exportContent.size()];
-    for (byte x = 0; x < output.length; x++) {
+    if (exportContent.isEmpty()) {
+        return output;
+    }
+    for (byte x = 0; x <= exportContent.size(); x++) {
         output[0][x] = exportName.get(x);
         output[1][x] = exportContent.get(x);
     }
