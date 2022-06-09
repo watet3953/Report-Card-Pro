@@ -1,3 +1,18 @@
+
+// TODO: clean up imports
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.File;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.ArrayList;
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.text.JTextComponent;
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,6 +30,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
      */
     public ReportCardProUI() {
         initComponents();
+        initComponentNames(jTabbedPane);
     }
 
     /**
@@ -66,30 +82,41 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jTabbedPane.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
 
         jTFNameFirst.setText("First Name");
+        jTFNameFirst.setToolTipText("First Name");
 
         jTFNameLast.setText("Last Name");
+        jTFNameLast.setToolTipText("Last Name");
 
         jTFSemester.setText("Semester");
+        jTFSemester.setToolTipText("Semester");
 
         jTFAverage.setEditable(false);
         jTFAverage.setText("Average");
+        jTFAverage.setToolTipText("Average");
 
         jTFID.setText("Student ID");
+        jTFID.setToolTipText("Student ID");
 
         jFrameClass0.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jTFClass0.setText("Class 0");
+        jTFClass0.setToolTipText("Class 0");
 
         jTFMark0.setText("Mark 0");
+        jTFMark0.setToolTipText("Mark 0");
 
         jTFCredit0.setText("Credit 0");
+        jTFCredit0.setToolTipText("Credit 0");
 
         jTFAverage0.setEditable(false);
         jTFAverage0.setText("Average 0");
+        jTFAverage0.setToolTipText("Average 0");
 
         jTFAttendance0.setText("Attendance 0");
+        jTFAttendance0.setToolTipText("Attendance 0");
 
         jTFComments0.setText("Comments 0");
+        jTFComments0.setToolTipText("Comments 0");
 
         jBttnRemove0.setText("Remove Class");
 
@@ -332,7 +359,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
+            .addComponent(jTabbedPane)
             .addComponent(jFrameTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -348,30 +375,68 @@ public class ReportCardProUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void initComponentNames(Component object) { // not sure if this could really be automated
+        if (object instanceof JTextComponent) {
+            object.setName(((JTextComponent)(object)).getText());
+        }
+        if (object instanceof Container) {
+            try {
+                Component[] objects = ((Container)(object)).getComponents();
+                for (Component object1 : objects) {
+                    initComponentNames(object1);
+                }
+            } catch (Exception e) {}
+        }
+    }
+    
     public String dataPath = "";
     
     private String queryDataPath() {
-        javax.swing.JOptionPane.showMessageDialog(null,"Please select the data folder.","Data Path Unspecified",1);
-        javax.swing.JFileChooser fc = new javax.swing.JFileChooser("");
-        fc.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
-        if (fc.showOpenDialog(null) ==  javax.swing.JFileChooser.APPROVE_OPTION) {
+        JOptionPane.showMessageDialog(null,"Please select the data folder.","Data Path Unspecified",1);
+        JFileChooser fc = new JFileChooser("");
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        if (fc.showOpenDialog(null) ==  JFileChooser.APPROVE_OPTION) {
             return fc.getSelectedFile().getAbsolutePath();
         }
         return "";
     }
     
-    private String[] returnContents(java.awt.Component object) {
-/*        if (object instanceof javax.swing.text.JTextComponent) {
-            return object.getText().split(""); // splitting string by nothing should yield an array of length 1
-        } else { try {
-                java.awt.Component[] objects = object.getComponents(); // does this need to be cast to a type that has this function?
-                String[] export = new String[objects.length]; // this needs to be an arraylist
-                for (byte x = 0; x < objects.length; x++) {
-                    export[x] = returnContents()
-                }
-            } catch (Exception e) {}
+    private String[][] returnContents(Component object) { // this whole function has some nasty typecasting, but it should work
+        ArrayList<String> exportContent  = new ArrayList<>();
+        ArrayList<String> exportName  = new ArrayList<>();
+        
+        if (object instanceof JTextComponent) {
+            exportName.add(((JTextComponent)(object)).getName());
+            exportContent.add(((JTextComponent)(object)).getText());
+            //System.out.println(((JTextComponent)(object)).getName());
         }
-*/  return null;  
+        if (object instanceof Container) {
+            Component[] objects = ((Container)(object)).getComponents();
+            for (Component object1 : objects) {
+                String[][] inFeed = returnContents(object1);
+                for (int y = 0; y < inFeed[0].length; y++) {
+                    exportName.add(inFeed[0][y]);
+                    exportContent.add(inFeed[1][y]);
+                }
+            }
+        }
+    String[][] output = new String[2][exportContent.size()];
+    if (exportContent.isEmpty()) {
+        return output;
+    }
+    
+    System.out.println(output.length);
+    System.out.println(output[0].length);
+    System.out.println(output[1].length);
+    for (int x = 0; x < exportName.size(); x++) {
+        output[0][x] = exportName.get(x);
+        System.out.println(output[0][x]);
+    }
+    for (int x = 0; x < exportContent.size(); x++) {
+        output[1][x] = exportContent.get(x);
+        System.out.println(output[1][x]);
+    }
+    return output;  
     }
     
     private void jBttnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnSaveActionPerformed
@@ -384,17 +449,43 @@ public class ReportCardProUI extends javax.swing.JFrame {
         }
         // check if file exists, prompt user if does
         String studentID = jTFID.getText();
-        java.io.File studentFile = new java.io.File(dataPath, studentID + ".csv");
+        File studentFile = new File(dataPath, studentID + ".csv");
         if (studentFile.canRead()) {
-           if (javax.swing.JOptionPane.showConfirmDialog(null,"Would you like to overwrite the existing file?","File Already Exists",1) == javax.swing.JOptionPane.NO_OPTION) {
+           if (JOptionPane.showConfirmDialog(null,"Would you like to overwrite the existing file?","File Already Exists",1) == javax.swing.JOptionPane.NO_OPTION) {
                return;
            } 
+        } else {
+            try {
+                studentFile.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        //java.awt.Component[] inputchildren = 
-        // get list of variables to save
-        // for all children of the input pane, if
-        // write to file
-        // show prompt for success
+        String[][] variables = returnContents(jFrameInput);
+        PrintWriter fileOut = null;
+        try {
+            fileOut = new PrintWriter(studentFile);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String line = "";
+        
+        for (String variable : variables[0]) {
+            System.out.println(variable);
+            line = line.concat(variable + ",");
+        }
+        
+        fileOut.println(line);
+        
+        line = "";
+        
+        for (String variable : variables[1]) {
+            System.out.println(variable);
+            line = line.concat(variable + ",");
+        }
+        
+        fileOut.println(line);
+        fileOut.close();
         System.out.println(dataPath);
     }//GEN-LAST:event_jBttnSaveActionPerformed
 
