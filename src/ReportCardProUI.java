@@ -30,6 +30,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
      */
     public ReportCardProUI() {
         initComponents();
+        initComponentNames(jTabbedPane);
     }
 
     /**
@@ -81,30 +82,41 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jTabbedPane.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
 
         jTFNameFirst.setText("First Name");
+        jTFNameFirst.setToolTipText("First Name");
 
         jTFNameLast.setText("Last Name");
+        jTFNameLast.setToolTipText("Last Name");
 
         jTFSemester.setText("Semester");
+        jTFSemester.setToolTipText("Semester");
 
         jTFAverage.setEditable(false);
         jTFAverage.setText("Average");
+        jTFAverage.setToolTipText("Average");
 
         jTFID.setText("Student ID");
+        jTFID.setToolTipText("Student ID");
 
         jFrameClass0.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jTFClass0.setText("Class 0");
+        jTFClass0.setToolTipText("Class 0");
 
         jTFMark0.setText("Mark 0");
+        jTFMark0.setToolTipText("Mark 0");
 
         jTFCredit0.setText("Credit 0");
+        jTFCredit0.setToolTipText("Credit 0");
 
         jTFAverage0.setEditable(false);
         jTFAverage0.setText("Average 0");
+        jTFAverage0.setToolTipText("Average 0");
 
         jTFAttendance0.setText("Attendance 0");
+        jTFAttendance0.setToolTipText("Attendance 0");
 
         jTFComments0.setText("Comments 0");
+        jTFComments0.setToolTipText("Comments 0");
 
         jBttnRemove0.setText("Remove Class");
 
@@ -347,7 +359,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
+            .addComponent(jTabbedPane)
             .addComponent(jFrameTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -363,6 +375,20 @@ public class ReportCardProUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void initComponentNames(Component object) { // not sure if this could really be automated
+        if (object instanceof JTextComponent) {
+            object.setName(((JTextComponent)(object)).getText());
+        }
+        if (object instanceof Container) {
+            try {
+                Component[] objects = ((Container)(object)).getComponents();
+                for (Component object1 : objects) {
+                    initComponentNames(object1);
+                }
+            } catch (Exception e) {}
+        }
+    }
+    
     public String dataPath = "";
     
     private String queryDataPath() {
@@ -382,27 +408,33 @@ public class ReportCardProUI extends javax.swing.JFrame {
         if (object instanceof JTextComponent) {
             exportName.add(((JTextComponent)(object)).getName());
             exportContent.add(((JTextComponent)(object)).getText());
-            System.out.println(((JTextComponent)(object)).getName());
+            //System.out.println(((JTextComponent)(object)).getName());
         }
         if (object instanceof Container) {
-            try {
-                Component[] objects = ((Container)(object)).getComponents();
-                for (byte x = 0; x < objects.length; x++) {
-                    String[][] inFeed = returnContents(objects[x]);
-                    for (byte y = 0; y < inFeed[0].length; y++) {
-                        exportName.add(inFeed[0][y]);
-                        exportContent.add(inFeed[1][y]);
-                    }
+            Component[] objects = ((Container)(object)).getComponents();
+            for (Component object1 : objects) {
+                String[][] inFeed = returnContents(object1);
+                for (int y = 0; y < inFeed[0].length; y++) {
+                    exportName.add(inFeed[0][y]);
+                    exportContent.add(inFeed[1][y]);
                 }
-            } catch (Exception e) {}
+            }
         }
     String[][] output = new String[2][exportContent.size()];
     if (exportContent.isEmpty()) {
         return output;
     }
-    for (byte x = 0; x <= exportContent.size(); x++) {
+    
+    System.out.println(output.length);
+    System.out.println(output[0].length);
+    System.out.println(output[1].length);
+    for (int x = 0; x < exportName.size(); x++) {
         output[0][x] = exportName.get(x);
+        System.out.println(output[0][x]);
+    }
+    for (int x = 0; x < exportContent.size(); x++) {
         output[1][x] = exportContent.get(x);
+        System.out.println(output[1][x]);
     }
     return output;  
     }
@@ -438,19 +470,21 @@ public class ReportCardProUI extends javax.swing.JFrame {
         }
         String line = "";
         
-        for (byte x = 0; x < variables[0].length; x++) {
-         line.concat(variables[0][x] + ",");
+        for (String variable : variables[0]) {
+            System.out.println(variable);
+            line = line.concat(variable + ",");
         }
         
-        fileOut.write(line + "\n");
+        fileOut.println(line);
         
         line = "";
         
-        for (byte x = 0; x < variables[1].length; x++) {
-            line.concat(variables[1][x] + ",");
+        for (String variable : variables[1]) {
+            System.out.println(variable);
+            line = line.concat(variable + ",");
         }
         
-        fileOut.write(line + "\n");
+        fileOut.println(line);
         fileOut.close();
         System.out.println(dataPath);
     }//GEN-LAST:event_jBttnSaveActionPerformed

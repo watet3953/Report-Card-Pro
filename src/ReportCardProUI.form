@@ -117,27 +117,32 @@
             <Component class="javax.swing.JTextField" name="jTFNameFirst">
               <Properties>
                 <Property name="text" type="java.lang.String" value="First Name"/>
+                <Property name="toolTipText" type="java.lang.String" value="First Name"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTFNameLast">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Last Name"/>
+                <Property name="toolTipText" type="java.lang.String" value="Last Name"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTFSemester">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Semester"/>
+                <Property name="toolTipText" type="java.lang.String" value="Semester"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTFAverage">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="text" type="java.lang.String" value="Average"/>
+                <Property name="toolTipText" type="java.lang.String" value="Average"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTFID">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Student ID"/>
+                <Property name="toolTipText" type="java.lang.String" value="Student ID"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JPanel" name="jFrameClass0">
@@ -188,32 +193,38 @@
                 <Component class="javax.swing.JTextField" name="jTFClass0">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Class 0"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Class 0"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTFMark0">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Mark 0"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Mark 0"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTFCredit0">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Credit 0"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Credit 0"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTFAverage0">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="Average 0"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Average 0"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTFAttendance0">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Attendance 0"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Attendance 0"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTFComments0">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Comments 0"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Comments 0"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="jBttnRemove0">
