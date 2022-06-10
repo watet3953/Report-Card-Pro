@@ -5,6 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.File;
 import java.io.PrintWriter;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
@@ -50,6 +54,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jTFSemester = new javax.swing.JTextField();
         jTFAverage = new javax.swing.JTextField();
         jTFID = new javax.swing.JTextField();
+        jBttnAddClass = new javax.swing.JButton();
         jFrameClass0 = new javax.swing.JPanel();
         jTFClass0 = new javax.swing.JTextField();
         jTFMark0 = new javax.swing.JTextField();
@@ -58,7 +63,6 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jTFAttendance0 = new javax.swing.JTextField();
         jTFComments0 = new javax.swing.JTextField();
         jBttnRemove0 = new javax.swing.JButton();
-        jBttnAddClass = new javax.swing.JButton();
         jFrameProcess = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jTFSNSV = new javax.swing.JTextField();
@@ -81,127 +85,80 @@ public class ReportCardProUI extends javax.swing.JFrame {
 
         jTabbedPane.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
 
+        jFrameInput.setLayout(new java.awt.GridLayout(10, 0));
+
         jTFNameFirst.setText("First Name");
         jTFNameFirst.setToolTipText("First Name");
+        jFrameInput.add(jTFNameFirst);
 
         jTFNameLast.setText("Last Name");
         jTFNameLast.setToolTipText("Last Name");
+        jFrameInput.add(jTFNameLast);
 
         jTFSemester.setText("Semester");
         jTFSemester.setToolTipText("Semester");
+        jFrameInput.add(jTFSemester);
 
         jTFAverage.setEditable(false);
         jTFAverage.setText("Average");
         jTFAverage.setToolTipText("Average");
+        jFrameInput.add(jTFAverage);
 
         jTFID.setText("Student ID");
         jTFID.setToolTipText("Student ID");
+        jFrameInput.add(jTFID);
+
+        jBttnAddClass.setText("Add Class");
+        jBttnAddClass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBttnAddClassActionPerformed(evt);
+            }
+        });
+        jFrameInput.add(jBttnAddClass);
 
         jFrameClass0.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jFrameClass0.setLayout(new javax.swing.BoxLayout(jFrameClass0, javax.swing.BoxLayout.LINE_AXIS));
 
         jTFClass0.setText("Class 0");
         jTFClass0.setToolTipText("Class 0");
+        jTFClass0.setMinimumSize(new java.awt.Dimension(40, 20));
+        jFrameClass0.add(jTFClass0);
 
         jTFMark0.setText("Mark 0");
         jTFMark0.setToolTipText("Mark 0");
+        jTFMark0.setMinimumSize(new java.awt.Dimension(40, 20));
+        jFrameClass0.add(jTFMark0);
 
         jTFCredit0.setText("Credit 0");
         jTFCredit0.setToolTipText("Credit 0");
+        jTFCredit0.setMinimumSize(new java.awt.Dimension(40, 20));
+        jFrameClass0.add(jTFCredit0);
 
         jTFAverage0.setEditable(false);
         jTFAverage0.setText("Average 0");
         jTFAverage0.setToolTipText("Average 0");
+        jTFAverage0.setMinimumSize(new java.awt.Dimension(40, 20));
+        jFrameClass0.add(jTFAverage0);
 
         jTFAttendance0.setText("Attendance 0");
         jTFAttendance0.setToolTipText("Attendance 0");
+        jTFAttendance0.setMinimumSize(new java.awt.Dimension(40, 20));
+        jFrameClass0.add(jTFAttendance0);
 
         jTFComments0.setText("Comments 0");
         jTFComments0.setToolTipText("Comments 0");
+        jTFComments0.setMinimumSize(new java.awt.Dimension(40, 20));
+        jFrameClass0.add(jTFComments0);
 
         jBttnRemove0.setText("Remove Class");
+        jBttnRemove0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBttnRemove0ActionPerformed(evt);
+            }
+        });
+        jFrameClass0.add(jBttnRemove0);
 
-        javax.swing.GroupLayout jFrameClass0Layout = new javax.swing.GroupLayout(jFrameClass0);
-        jFrameClass0.setLayout(jFrameClass0Layout);
-        jFrameClass0Layout.setHorizontalGroup(
-            jFrameClass0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrameClass0Layout.createSequentialGroup()
-                .addComponent(jTFClass0, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFMark0, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFCredit0, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFAverage0, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFAttendance0, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFComments0, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBttnRemove0)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jFrameClass0Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTFAttendance0, jTFAverage0, jTFClass0, jTFComments0, jTFCredit0, jTFMark0});
-
-        jFrameClass0Layout.setVerticalGroup(
-            jFrameClass0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrameClass0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jTFClass0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jTFMark0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jTFCredit0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jTFAverage0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jTFAttendance0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jTFComments0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jBttnRemove0))
-        );
-
-        jBttnAddClass.setText("Add Class");
-
-        javax.swing.GroupLayout jFrameInputLayout = new javax.swing.GroupLayout(jFrameInput);
-        jFrameInput.setLayout(jFrameInputLayout);
-        jFrameInputLayout.setHorizontalGroup(
-            jFrameInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrameInputLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jFrameInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jFrameClass0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jFrameInputLayout.createSequentialGroup()
-                        .addGroup(jFrameInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jFrameInputLayout.createSequentialGroup()
-                                .addComponent(jTFNameFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFNameLast, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFAverage, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jBttnAddClass))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-
-        jFrameInputLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTFAverage, jTFID, jTFNameFirst, jTFNameLast, jTFSemester});
-
-        jFrameInputLayout.setVerticalGroup(
-            jFrameInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrameInputLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jFrameInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFNameFirst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFNameLast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFSemester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFAverage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFrameClass0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBttnAddClass)
-                .addContainerGap(206, Short.MAX_VALUE))
-        );
-
-        jFrameInputLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTFAverage, jTFID, jTFNameFirst, jTFNameLast, jTFSemester});
+        jFrameInput.add(jFrameClass0);
 
         jTabbedPane.addTab("Input", jFrameInput);
 
@@ -221,7 +178,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(255, 255, 255)
                         .addComponent(jBttnRunSN, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(260, Short.MAX_VALUE))
+                .addContainerGap(565, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,7 +212,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBttnAddScript)
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Process", jFrameProcess);
@@ -272,7 +229,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jFramePreview.setLayout(jFramePreviewLayout);
         jFramePreviewLayout.setHorizontalGroup(
             jFramePreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 474, Short.MAX_VALUE)
+            .addGap(0, 779, Short.MAX_VALUE)
         );
         jFramePreviewLayout.setVerticalGroup(
             jFramePreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,7 +266,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
                     .addComponent(jCBFormats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jBttnSaveFormat)
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
             .addGroup(jFramePrintLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jFramePreview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -489,6 +446,35 @@ public class ReportCardProUI extends javax.swing.JFrame {
         System.out.println(dataPath);
     }//GEN-LAST:event_jBttnSaveActionPerformed
 
+    private Object deepCopyUI(Object in) throws IOException, ClassNotFoundException {
+        ByteArrayOutputStream bao = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(bao);
+        oos.writeObject(in);
+        
+        ByteArrayInputStream bai = new ByteArrayInputStream(bao.toByteArray());
+        ObjectInputStream ois = new ObjectInputStream(bai);
+        Object copied = ois.readObject();
+        return copied;
+    }
+    
+    private void jBttnAddClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnAddClassActionPerformed
+        JPanel copy = null;
+        try {
+            copy = (JPanel)(deepCopyUI(jFrameClass0));
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jFrameInput.add(copy);
+        jFrameInput.revalidate();
+        jFrameInput.repaint();
+        
+        
+    }//GEN-LAST:event_jBttnAddClassActionPerformed
+
+    private void jBttnRemove0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnRemove0ActionPerformed
+        //jFrameClass0.();
+    }//GEN-LAST:event_jBttnRemove0ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -505,22 +491,16 @@ public class ReportCardProUI extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ReportCardProUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ReportCardProUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ReportCardProUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ReportCardProUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ReportCardProUI().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new ReportCardProUI().setVisible(true);
         });
     }
 
