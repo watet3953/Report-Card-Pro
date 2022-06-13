@@ -446,6 +446,56 @@ public class ReportCardProUI extends javax.swing.JFrame {
         System.out.println(dataPath);
     }//GEN-LAST:event_jBttnSaveActionPerformed
 
+    private int curIncrement = 0;
+    
+    private String incrementString(String in) {
+        if (in == null || in.isEmpty()) {
+            //return "1";
+            return Integer.toString(curIncrement);
+        }
+        if (!in.endsWith("[0-9]")) {
+            //return in + "1";
+            return in + Integer.toString(curIncrement);
+        }
+        int readerPos = in.length();
+        while (readerPos > 0) {
+            readerPos--;
+            if (!Character.isDigit(in.charAt(readerPos))) {
+                readerPos++;
+                break;
+            }
+        }
+        int curValue = Integer.parseInt(in.substring(readerPos));
+        String shavedString = in.substring(0,readerPos - 1);
+        //return shavedString + Integer.toString(curValue++);
+        return shavedString + Integer.toString(curIncrement);
+    }
+    
+    
+    
+    private Object deepIncrementName(Object in) {
+        if (in instanceof Container) {
+            Component[] children = ((Container)(in)).getComponents();
+            for (Component child1 : children) {
+                Object returnedChild = deepIncrementName(child1);
+                ((Container) in).remove(child1);
+                ((Container) in).add((Component)(returnedChild));
+            }
+        }
+        if (in instanceof Component) {  
+            Component inC = (Component)(in);
+            inC.setName(incrementString(inC.getName()));
+            if (inC instanceof JTextField) {
+                JTextField inTF = (JTextField)(inC);
+                inTF.setToolTipText(inTF.getName());
+                inTF.setText(inTF.getName());
+                return inTF;
+            }
+            return inC;
+        }
+        return in;
+    }
+    
     private Object deepCopyUI(Object in) throws IOException, ClassNotFoundException {
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(bao);
@@ -464,7 +514,9 @@ public class ReportCardProUI extends javax.swing.JFrame {
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        jFrameInput.add(copy);
+        curIncrement++;
+        copy = (JPanel)(deepIncrementName(copy));
+        jFrameInput.add(copy); // not sure if all 3 of these are needed, probably good to be safe
         jFrameInput.revalidate();
         jFrameInput.repaint();
         
@@ -472,7 +524,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jBttnAddClassActionPerformed
 
     private void jBttnRemove0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnRemove0ActionPerformed
-        //jFrameClass0.();
+        // this might work as a custom button class (with the action performed action tied to deleting it's parent)
     }//GEN-LAST:event_jBttnRemove0ActionPerformed
 
     /**
