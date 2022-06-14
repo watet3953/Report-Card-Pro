@@ -62,7 +62,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jTFAverage0 = new javax.swing.JTextField();
         jTFAttendance0 = new javax.swing.JTextField();
         jTFComments0 = new javax.swing.JTextField();
-        jBttnRemove0 = new javax.swing.JButton();
+        jBttnRemove0 = new my.reportcardpro.JButtonDestructive();
         jFrameProcess = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jTFSNSV = new javax.swing.JTextField();
@@ -151,11 +151,6 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jFrameClass0.add(jTFComments0);
 
         jBttnRemove0.setText("Remove Class");
-        jBttnRemove0.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBttnRemove0ActionPerformed(evt);
-            }
-        });
         jFrameClass0.add(jBttnRemove0);
 
         jFrameInput.add(jFrameClass0);
@@ -274,6 +269,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
 
         jTabbedPane.addTab("Print", jFramePrint);
 
+        jLblTitle.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLblTitle.setText("Report Card Pro");
 
         jBttnSave.setLabel("Save");
@@ -284,6 +280,11 @@ public class ReportCardProUI extends javax.swing.JFrame {
         });
 
         jBttnLoad.setText("Load");
+        jBttnLoad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBttnLoadActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jFrameTopLayout = new javax.swing.GroupLayout(jFrameTop);
         jFrameTop.setLayout(jFrameTopLayout);
@@ -349,7 +350,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
     public String dataPath = "";
     
     private String queryDataPath() {
-        JOptionPane.showMessageDialog(null,"Please select the data folder.","Data Path Unspecified",1);
+        JOptionPane.showMessageDialog(null,"Please select the folder where your data is stored.","Data Path Unspecified",1);
         JFileChooser fc = new JFileChooser("");
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         if (fc.showOpenDialog(null) ==  JFileChooser.APPROVE_OPTION) {
@@ -446,19 +447,21 @@ public class ReportCardProUI extends javax.swing.JFrame {
         System.out.println(dataPath);
     }//GEN-LAST:event_jBttnSaveActionPerformed
 
-    private int curIncrement = 0;
+    private int curIncrement = 0; // TODO: make this based on the total number of active classes displayed
     
     private String incrementString(String in) {
+        //System.out.println(in);
         if (in == null || in.isEmpty()) {
             //return "1";
             return Integer.toString(curIncrement);
         }
-        if (!in.endsWith("[0-9]")) {
+/*      if (!in.endsWith("[0-9]")) {
             //return in + "1";
             return in + Integer.toString(curIncrement);
         }
+*/
         int readerPos = in.length();
-        while (readerPos > 0) {
+        while (readerPos > -1) {
             readerPos--;
             if (!Character.isDigit(in.charAt(readerPos))) {
                 readerPos++;
@@ -466,7 +469,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
             }
         }
         int curValue = Integer.parseInt(in.substring(readerPos));
-        String shavedString = in.substring(0,readerPos - 1);
+        String shavedString = in.substring(0,readerPos);
         //return shavedString + Integer.toString(curValue++);
         return shavedString + Integer.toString(curIncrement);
     }
@@ -523,9 +526,24 @@ public class ReportCardProUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jBttnAddClassActionPerformed
 
-    private void jBttnRemove0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnRemove0ActionPerformed
-        // this might work as a custom button class (with the action performed action tied to deleting it's parent)
-    }//GEN-LAST:event_jBttnRemove0ActionPerformed
+    private void jBttnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnLoadActionPerformed
+        // query data path
+        if (dataPath.isEmpty()) {
+            dataPath = queryDataPath();
+            if (dataPath.isEmpty()) {
+                return;
+            }
+        } 
+        
+        // request student name or ID
+        // Either perform full directory search using name, or directly look up the file with the ID
+        // load file into scanner
+        // first five inputs of each line will ALWAYS be the non-class variables.
+        // read in first line, ensure that all required fields exist
+        // read in second line, directly correlating it with the first 
+        // ( Extra data in the first line will be added as blank fields, extra data in the second line will be discarded)
+        // exit after second line is read, subsequint lines are not able to be understood
+    }//GEN-LAST:event_jBttnLoadActionPerformed
 
     /**
      * @param args the command line arguments

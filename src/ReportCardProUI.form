@@ -178,9 +178,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Remove Class"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBttnRemove0ActionPerformed"/>
-                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new my.reportcardpro.JButtonDestructive()"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -419,6 +419,9 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLblTitle">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="11" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Report Card Pro"/>
           </Properties>
         </Component>
@@ -437,6 +440,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Load"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBttnLoadActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
