@@ -1,3 +1,5 @@
+package my.reportcardpro;
+
 
 // TODO: clean up imports
 
@@ -536,7 +538,24 @@ public class ReportCardProUI extends javax.swing.JFrame {
         } 
         
         // request student name or ID
-        // Either perform full directory search using name, or directly look up the file with the ID
+        String[] choices = {"Student Name","ID","Search by Property"};
+        int x = JOptionPane.showOptionDialog(null, "Please specify lookup type.", "Lookup Type", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
+        File studentFile;
+        switch (x) {
+            case 0:
+                //student name lookup
+                
+            case 1:
+                // ID lookup
+                String studentID = JOptionPane.showInputDialog("Please Input Student ID");
+                studentFile = new File(dataPath, studentID + ".csv");
+                if (!studentFile.canRead()) {
+                    JOptionPane.showMessageDialog(null, "File not found.");
+                    return;
+                } 
+            case 2:
+                // property lookup
+        }
         // load file into scanner
         // first five inputs of each line will ALWAYS be the non-class variables.
         // read in first line, ensure that all required fields exist
