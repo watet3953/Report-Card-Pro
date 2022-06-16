@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.text.JTextComponent;
@@ -528,6 +529,56 @@ public class ReportCardProUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jBttnAddClassActionPerformed
 
+    private boolean searchPropertyFile(File fileIn, String propertyName, String propertyValue) throws FileNotFoundException {
+        Scanner in = new Scanner(fileIn);
+        if (!in.hasNextLine()) {
+            return false;
+        }
+        String line = in.nextLine();
+        if (!in.hasNextLine()) {
+            return false;
+        }
+        String[] splitLine = line.split(",");
+        int position = -1;
+        for (int x = 0; x < splitLine.length; x++) {
+            if (splitLine[x].equals(propertyName)) {
+                position = x;
+                break;
+            }
+        }
+        if (position < 0) {
+            return false;
+        }
+        line = in.nextLine();
+        splitLine = line.split(",");
+        return splitLine[position].equals(propertyValue);
+    }
+    
+    private int listContains(String value, String[] list) {
+        for (int x = 0; x < list.length; x++) {
+            if (list[x].equals(value)) {
+                return x;
+            }
+        }
+        return -1;
+    }
+    
+    private void deepLoadSearch(Object in, String[] names, String[] values) { // given an object, iterate through all children and apply values to them if name matches
+        if (in instanceof JTextComponent) {
+            try {
+                ((JTextComponent)(in)).setText(values[listContains(((JTextComponent)(in)).getName(),names)]);
+            } catch (IndexOutOfBoundsException e) {}
+        }
+        if (in instanceof Container) {
+            try {
+                Component[] objects = ((Container)(in)).getComponents();
+                for (Component object1 : objects) {
+                    deepLoadSearch(object1, names, values);
+                }
+            } catch (Exception e) {}
+        }
+    }
+    
     private void jBttnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnLoadActionPerformed
         // query data path
         if (dataPath.isEmpty()) {
@@ -540,11 +591,25 @@ public class ReportCardProUI extends javax.swing.JFrame {
         // request student name or ID
         String[] choices = {"Student Name","ID","Search by Property"};
         int x = JOptionPane.showOptionDialog(null, "Please specify lookup type.", "Lookup Type", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
-        File studentFile;
+        File studentFile = null;
         switch (x) {
             case 0:
                 //student name lookup
-                
+                String studentName = JOptionPane.showInputDialog("Please Input Student Last Name");
+                boolean fileFound1 = false;
+                for (File checkedFile : new File(dataPath).listFiles()) {
+                    try {
+                        fileFound1 = searchPropertyFile(checkedFile,"Last Name",studentName);
+                    } catch(FileNotFoundException e) {}
+                    if (fileFound1) {
+                        studentFile = checkedFile;
+                        break;
+                    }
+                }
+                if (!fileFound1) {
+                    return;
+                }
+                break;
             case 1:
                 // ID lookup
                 String studentID = JOptionPane.showInputDialog("Please Input Student ID");
@@ -553,15 +618,47 @@ public class ReportCardProUI extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "File not found.");
                     return;
                 } 
+                break;
             case 2:
                 // property lookup
+                String propertyName = JOptionPane.showInputDialog("Please Input The Name of the Type to search by");
+                String propertyValue = JOptionPane.showInputDialog("Please Input the Value to search for");
+                boolean fileFound2 = false;
+                for (File checkedFile : new File(dataPath).listFiles()) {
+                    try {
+                        fileFound2 = searchPropertyFile(checkedFile,propertyName,propertyValue);
+                    } catch(FileNotFoundException e) {}
+                    if (fileFound2) {
+                        studentFile = checkedFile;
+                        break;
+                    }
+                }
+                if (!fileFound2) {
+                    return;
+                }
+                break;
+        }
+        if (studentFile == null || !studentFile.canRead()) {
+            System.err.println("Student File cannot be Read or doesn't exist!");
+            return;
         }
         // load file into scanner
-        // first five inputs of each line will ALWAYS be the non-class variables.
-        // read in first line, ensure that all required fields exist
-        // read in second line, directly correlating it with the first 
-        // ( Extra data in the first line will be added as blank fields, extra data in the second line will be discarded)
-        // exit after second line is read, subsequint lines are not able to be understood
+        Scanner fileIn = null;
+        try {
+            fileIn = new Scanner(studentFile);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        String line = fileIn.nextLine();
+        String[] variableNames = line.split(","); // read in first line
+        line = fileIn.nextLine();
+        String[] variableValues = line.split(","); // read in second line, directly correlating it with the first
+        fileIn.close(); // exit after second line is read, subsequint lines are not able to be understood
+        
+        // TODO: figure out how to set class number based on load (maybe just dump a bunch of empty ones in and then trim extra?)
+        
+        deepLoadSearch(jFrameInput,variableNames,variableValues);
     }//GEN-LAST:event_jBttnLoadActionPerformed
 
     /**
