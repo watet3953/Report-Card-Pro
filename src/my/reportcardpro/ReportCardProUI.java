@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import javax.swing.text.JTextComponent;
 
 
@@ -450,9 +451,21 @@ public class ReportCardProUI extends javax.swing.JFrame {
         System.out.println(dataPath);
     }//GEN-LAST:event_jBttnSaveActionPerformed
 
-    private int curIncrement = 0; // TODO: make this based on the total number of active classes displayed
+    private int curIncrement = 0;
+    
+    private void reloadCurIncrement() {
+        int runningIncrement = 0;
+        Component[] children = jFrameInput.getComponents();
+        for (Component child1 : children) {
+            if (child1 instanceof JPanel) {
+                runningIncrement++;
+            }
+        }
+        curIncrement = runningIncrement;
+    }
     
     private String incrementString(String in) {
+        reloadCurIncrement();
         //System.out.println(in);
         if (in == null || in.isEmpty()) {
             //return "1";
@@ -656,8 +669,11 @@ public class ReportCardProUI extends javax.swing.JFrame {
         String[] variableValues = line.split(","); // read in second line, directly correlating it with the first
         fileIn.close(); // exit after second line is read, subsequint lines are not able to be understood
         
-        // TODO: figure out how to set class number based on load (maybe just dump a bunch of empty ones in and then trim extra?)
-        
+        reloadCurIncrement();
+        int classDifference = ((variableNames.length - 5) / 6) - curIncrement;
+        for (int j = 0; j < classDifference; j++) { 
+            jBttnAddClassActionPerformed(new ActionEvent(this,0,""));
+        }
         deepLoadSearch(jFrameInput,variableNames,variableValues);
     }//GEN-LAST:event_jBttnLoadActionPerformed
 
