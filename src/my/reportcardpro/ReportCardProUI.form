@@ -177,6 +177,7 @@
                 <Component class="javax.swing.JButton" name="jBttnRemove0">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Remove Class"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new my.reportcardpro.JButtonDestructive()"/>
@@ -300,7 +301,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jCBFormats" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jBttnSaveFormat" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                          <Component id="jBttnLoadFormats" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
                           <Component id="jBttnPrintSave" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
@@ -320,7 +321,7 @@
                           <Component id="jCBFormats" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jBttnSaveFormat" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBttnLoadFormats" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="146" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -344,11 +345,8 @@
             <Component class="javax.swing.JComboBox" name="jCBFormats">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
+                  <StringArray count="1">
+                    <StringItem index="0" value="Raw Data"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -368,7 +366,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="779" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="763" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -378,9 +376,9 @@
                 </DimensionLayout>
               </Layout>
             </Container>
-            <Component class="javax.swing.JButton" name="jBttnSaveFormat">
+            <Component class="javax.swing.JButton" name="jBttnLoadFormats">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&quot;Save Format&quot;"/>
+                <Property name="text" type="java.lang.String" value="Load Formats"/>
               </Properties>
             </Component>
           </SubComponents>
