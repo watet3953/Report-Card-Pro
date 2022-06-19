@@ -35,7 +35,7 @@ and [sv] is the name of a value from an added script
 |JButton          |Print/Save Button                |"Print / Save"   |jBttnPrintSave   |
 |JLabel           |Format Type Label                |"Format Type:    |jLblFormatType   |
 |JComboBox        |List of Print Formats            |N/A              |jCBFormats       |
-|JButton          |Saves Format Layout              |"Save Format"    |jBttnSaveFormat  |
+|JButton          |Saves Format Layout              |"Load Formats"   |jBttnLoadFormats |
 |JPanel           |Holds the Preview for the Format |N/A              |jFramePreview    |
 
 
