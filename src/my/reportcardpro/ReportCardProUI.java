@@ -18,6 +18,9 @@ import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.FileInputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import javax.swing.text.JTextComponent;
 
 
@@ -218,25 +221,30 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jTabbedPane.addTab("Process", jFrameProcess);
 
         jBttnPrintSave.setText("Print / Save");
+        jBttnPrintSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBttnPrintSaveActionPerformed(evt);
+            }
+        });
 
         jLblFormatType.setText("Format Type :");
 
         jCBFormats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Raw Data" }));
+        jCBFormats.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBFormatsItemStateChanged(evt);
+            }
+        });
 
-        jFramePreview.setBorder(javax.swing.BorderFactory.createTitledBorder("Window"));
-
-        javax.swing.GroupLayout jFramePreviewLayout = new javax.swing.GroupLayout(jFramePreview);
-        jFramePreview.setLayout(jFramePreviewLayout);
-        jFramePreviewLayout.setHorizontalGroup(
-            jFramePreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 763, Short.MAX_VALUE)
-        );
-        jFramePreviewLayout.setVerticalGroup(
-            jFramePreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        jFramePreview.setBorder(javax.swing.BorderFactory.createTitledBorder("Preview"));
+        jFramePreview.setLayout(new javax.swing.BoxLayout(jFramePreview, javax.swing.BoxLayout.LINE_AXIS));
 
         jBttnLoadFormats.setText("Load Formats");
+        jBttnLoadFormats.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBttnLoadFormatsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jFramePrintLayout = new javax.swing.GroupLayout(jFramePrint);
         jFramePrint.setLayout(jFramePrintLayout);
@@ -364,6 +372,16 @@ public class ReportCardProUI extends javax.swing.JFrame {
         return "";
     }
     
+    private String queryFormatPath() {
+        JOptionPane.showMessageDialog(null,"Please select the folder where your formatting files are stored.","Format Path Unspecified",1);
+        JFileChooser fc = new JFileChooser("");
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        if (fc.showOpenDialog(null) ==  JFileChooser.APPROVE_OPTION) {
+            return fc.getSelectedFile().getAbsolutePath();
+        }
+        return "";
+    }
+    
     private String[][] returnContents(Component object) { // this whole function has some nasty typecasting, but it should work
         ArrayList<String> exportContent  = new ArrayList<>();
         ArrayList<String> exportName  = new ArrayList<>();
@@ -388,16 +406,16 @@ public class ReportCardProUI extends javax.swing.JFrame {
         return output;
     }
     
-    System.out.println(output.length);
-    System.out.println(output[0].length);
-    System.out.println(output[1].length);
+    //System.out.println(output.length);
+    //System.out.println(output[0].length);
+    //System.out.println(output[1].length);
     for (int x = 0; x < exportName.size(); x++) {
         output[0][x] = exportName.get(x);
-        System.out.println(output[0][x]);
+        //System.out.println(output[0][x]);
     }
     for (int x = 0; x < exportContent.size(); x++) {
         output[1][x] = exportContent.get(x);
-        System.out.println(output[1][x]);
+        //System.out.println(output[1][x]);
     }
     return output;  
     }
@@ -680,6 +698,91 @@ public class ReportCardProUI extends javax.swing.JFrame {
         }
         deepLoadSearch(jFrameInput,variableNames,variableValues);
     }//GEN-LAST:event_jBttnLoadActionPerformed
+
+    public String formatPath = null;
+    
+    public String curFormat = null;
+    
+    public File loadedFormatFile = null;
+    
+    private void jBttnPrintSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnPrintSaveActionPerformed
+    try {
+            Desktop.getDesktop().print(loadedFormatFile);
+        } catch (IOException ex) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBttnPrintSaveActionPerformed
+
+    private void jBttnLoadFormatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnLoadFormatsActionPerformed
+        // ask for format path
+        formatPath = queryFormatPath();
+        // search folder for all .pdf types, load into format list
+        jCBFormats.removeAllItems();
+        for (File checkedFile : new File(formatPath).listFiles()) {
+            if (checkedFile.getPath().endsWith(".html")) {
+                jCBFormats.addItem(checkedFile.getName());
+            }
+        }
+    }//GEN-LAST:event_jBttnLoadFormatsActionPerformed
+
+    private void jCBFormatsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBFormatsItemStateChanged
+        if (!(evt.getStateChange() == java.awt.event.ItemEvent.SELECTED)) {
+            return;
+        }
+        Object item = evt.getItem();
+        if (!(item instanceof String)) {
+            return;
+        }
+        curFormat = ((String)(item));
+        // load the file
+        File loadFile = null;
+        try {
+            loadFile = new File(formatPath + curFormat + ".html");
+        } catch (Exception ex) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        // make a temp file
+        File tempFile = null;
+        try {
+            tempFile = File.createTempFile(curFormat,".html");
+        } catch (IOException ex) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        // edit the temp file to have all the variables in it
+        try {
+            String readFile = new String(Files.readAllBytes(tempFile.toPath()), StandardCharsets.UTF_8);
+            String[][] variables = returnContents(jFrameInput);
+            for (int x = 0; x < variables[0].length; x++) {
+                readFile = readFile.replaceAll(variables[0][x], variables[1][x]);
+            }
+            Files.write(tempFile.toPath(), readFile.getBytes(StandardCharsets.UTF_8));
+        } catch (IOException ex) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        loadedFormatFile = tempFile;
+        
+        // load temp file to window
+        JEditorPane jep = new JEditorPane();
+         jep.setEditable(false);   
+
+         try {
+           jep.setPage(loadedFormatFile.toURI().toURL());
+         }
+         catch (IOException e) {
+           jep.setContentType("text/html");
+           jep.setText("<html>Could not display Format</html>");
+         } 
+
+         JScrollPane scrollPane = new JScrollPane(jep);
+         jFramePreview.removeAll();
+         jFramePreview.add(scrollPane);
+         jFramePreview.revalidate();
+         jFramePreview.repaint();
+        // TODO: cleanup temp file when no longer in use?
+    }//GEN-LAST:event_jCBFormatsItemStateChanged
 
     /**
      * @param args the command line arguments
