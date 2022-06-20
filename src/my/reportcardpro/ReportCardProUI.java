@@ -791,7 +791,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
         ScriptEngine engine = sem.getEngineByName("nashorn");
         // pass in all current variables
         try {
-            engine.eval(rawScripts.get(scriptCount));
+            engine.eval(rawScripts.get(scriptCount - 1));
         } catch (ScriptException ex) {
             Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
         }
