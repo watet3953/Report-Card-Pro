@@ -22,6 +22,8 @@ import java.io.FileInputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import javax.swing.text.JTextComponent;
+import javax.script.*;
+import javax.swing.border.*;
 
 
 /*
@@ -71,10 +73,10 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jTFComments0 = new javax.swing.JTextField();
         jBttnRemove0 = new my.reportcardpro.JButtonDestructive();
         jFrameProcess = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        jBttnAddScript = new javax.swing.JButton();
+        jFrameScript0 = new javax.swing.JPanel();
         jTFSNSV = new javax.swing.JTextField();
         jBttnRunSN = new javax.swing.JButton();
-        jBttnAddScript = new javax.swing.JButton();
         jFramePrint = new javax.swing.JPanel();
         jBttnPrintSave = new javax.swing.JButton();
         jLblFormatType = new javax.swing.JLabel();
@@ -165,58 +167,24 @@ public class ReportCardProUI extends javax.swing.JFrame {
 
         jTabbedPane.addTab("Input", jFrameInput);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("[SN]"));
+        jFrameProcess.setLayout(new java.awt.GridLayout(5, 1));
 
-        jBttnRunSN.setText("\"Run Script\"");
+        jBttnAddScript.setText("Add Script");
+        jBttnAddScript.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBttnAddScriptActionPerformed(evt);
+            }
+        });
+        jFrameProcess.add(jBttnAddScript);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jTFSNSV, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(255, 255, 255)
-                        .addComponent(jBttnRunSN, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(565, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTFSNSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(jBttnRunSN)
-                .addContainerGap())
-        );
+        jFrameScript0.setBorder(javax.swing.BorderFactory.createTitledBorder("[SN]"));
+        jFrameScript0.setLayout(new javax.swing.BoxLayout(jFrameScript0, javax.swing.BoxLayout.LINE_AXIS));
+        jFrameScript0.add(jTFSNSV);
 
-        jBttnAddScript.setText("\"Add Script\"");
+        jBttnRunSN.setText("Run Script");
+        jFrameScript0.add(jBttnRunSN);
 
-        javax.swing.GroupLayout jFrameProcessLayout = new javax.swing.GroupLayout(jFrameProcess);
-        jFrameProcess.setLayout(jFrameProcessLayout);
-        jFrameProcessLayout.setHorizontalGroup(
-            jFrameProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrameProcessLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jFrameProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jFrameProcessLayout.createSequentialGroup()
-                        .addComponent(jBttnAddScript, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jFrameProcessLayout.setVerticalGroup(
-            jFrameProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrameProcessLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBttnAddScript)
-                .addContainerGap(102, Short.MAX_VALUE))
-        );
+        jFrameProcess.add(jFrameScript0);
 
         jTabbedPane.addTab("Process", jFrameProcess);
 
@@ -784,6 +752,52 @@ public class ReportCardProUI extends javax.swing.JFrame {
         // TODO: cleanup temp file when no longer in use?
     }//GEN-LAST:event_jCBFormatsItemStateChanged
 
+    private ArrayList<String> rawScripts = new ArrayList<String>();
+    
+    private int scriptCount = 0;
+    
+    private void jBttnAddScriptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnAddScriptActionPerformed
+        JOptionPane.showMessageDialog(null,"Please select the script to load.","Select Script",1);
+        JFileChooser fc = new JFileChooser("");
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        if (!(fc.showOpenDialog(null) ==  JFileChooser.APPROVE_OPTION)) {
+            return;
+        }
+        File script = new File(fc.getSelectedFile().getAbsolutePath());
+        
+        try {
+            rawScripts.add(new String(Files.readAllBytes(script.toPath()), StandardCharsets.UTF_8));
+        } catch (IOException IOException) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, IOException);
+        }
+        
+        JPanel copy = null;
+        
+        try {
+            copy = (JPanel)(deepCopyUI(jFrameScript0));
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        scriptCount++;
+        copy = (JPanel)(deepIncrementName(copy));
+        TitledBorder border = (TitledBorder)(copy.getBorder());
+        border.setTitle(script.getName());
+        copy.setBorder(border);
+        jFrameProcess.add(copy); // not sure if all 3 of these are needed, probably good to be safe
+        jFrameProcess.revalidate();
+        jFrameProcess.repaint();
+        
+        ScriptEngineManager sem = new ScriptEngineManager();
+        ScriptEngine engine = sem.getEngineByName("nashorn");
+        // pass in all current variables
+        try {
+            engine.eval(rawScripts.get(scriptCount));
+        } catch (ScriptException ex) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // pass out all variables
+    }//GEN-LAST:event_jBttnAddScriptActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -829,10 +843,10 @@ public class ReportCardProUI extends javax.swing.JFrame {
     private javax.swing.JPanel jFramePreview;
     private javax.swing.JPanel jFramePrint;
     private javax.swing.JPanel jFrameProcess;
+    private javax.swing.JPanel jFrameScript0;
     private javax.swing.JPanel jFrameTop;
     private javax.swing.JLabel jLblFormatType;
     private javax.swing.JLabel jLblTitle;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTFAttendance0;
     private javax.swing.JTextField jTFAverage;
     private javax.swing.JTextField jTFAverage0;
