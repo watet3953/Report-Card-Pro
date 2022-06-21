@@ -1,8 +1,5 @@
 package my.reportcardpro;
 
-
-// TODO: clean up imports
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.File;
@@ -14,9 +11,15 @@ import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import javax.swing.text.JTextComponent;
+import javax.script.*;
+import javax.swing.border.*;
 
 
 /*
@@ -66,16 +69,16 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jTFComments0 = new javax.swing.JTextField();
         jBttnRemove0 = new my.reportcardpro.JButtonDestructive();
         jFrameProcess = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        jBttnAddScript = new javax.swing.JButton();
+        jFrameScript0 = new javax.swing.JPanel();
         jTFSNSV = new javax.swing.JTextField();
         jBttnRunSN = new javax.swing.JButton();
-        jBttnAddScript = new javax.swing.JButton();
         jFramePrint = new javax.swing.JPanel();
         jBttnPrintSave = new javax.swing.JButton();
         jLblFormatType = new javax.swing.JLabel();
         jCBFormats = new javax.swing.JComboBox<>();
         jFramePreview = new javax.swing.JPanel();
-        jBttnSaveFormat = new javax.swing.JButton();
+        jBttnLoadFormats = new javax.swing.JButton();
         jFrameTop = new javax.swing.JPanel();
         jLblTitle = new javax.swing.JLabel();
         jBttnSave = new javax.swing.JButton();
@@ -153,87 +156,59 @@ public class ReportCardProUI extends javax.swing.JFrame {
         jFrameClass0.add(jTFComments0);
 
         jBttnRemove0.setText("Remove Class");
+        jBttnRemove0.setEnabled(false);
         jFrameClass0.add(jBttnRemove0);
 
         jFrameInput.add(jFrameClass0);
 
         jTabbedPane.addTab("Input", jFrameInput);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("[SN]"));
+        jFrameProcess.setLayout(new java.awt.GridLayout(5, 1));
 
-        jBttnRunSN.setText("\"Run Script\"");
+        jBttnAddScript.setText("Add Script");
+        jBttnAddScript.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBttnAddScriptActionPerformed(evt);
+            }
+        });
+        jFrameProcess.add(jBttnAddScript);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jTFSNSV, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(255, 255, 255)
-                        .addComponent(jBttnRunSN, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(565, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTFSNSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(jBttnRunSN)
-                .addContainerGap())
-        );
+        jFrameScript0.setBorder(javax.swing.BorderFactory.createTitledBorder("[SN]"));
+        jFrameScript0.setLayout(new javax.swing.BoxLayout(jFrameScript0, javax.swing.BoxLayout.LINE_AXIS));
+        jFrameScript0.add(jTFSNSV);
 
-        jBttnAddScript.setText("\"Add Script\"");
+        jBttnRunSN.setText("Run Script");
+        jFrameScript0.add(jBttnRunSN);
 
-        javax.swing.GroupLayout jFrameProcessLayout = new javax.swing.GroupLayout(jFrameProcess);
-        jFrameProcess.setLayout(jFrameProcessLayout);
-        jFrameProcessLayout.setHorizontalGroup(
-            jFrameProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrameProcessLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jFrameProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jFrameProcessLayout.createSequentialGroup()
-                        .addComponent(jBttnAddScript, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jFrameProcessLayout.setVerticalGroup(
-            jFrameProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrameProcessLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBttnAddScript)
-                .addContainerGap(102, Short.MAX_VALUE))
-        );
+        jFrameProcess.add(jFrameScript0);
 
         jTabbedPane.addTab("Process", jFrameProcess);
 
         jBttnPrintSave.setText("Print / Save");
+        jBttnPrintSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBttnPrintSaveActionPerformed(evt);
+            }
+        });
 
         jLblFormatType.setText("Format Type :");
 
-        jCBFormats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBFormats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Raw Data" }));
+        jCBFormats.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBFormatsItemStateChanged(evt);
+            }
+        });
 
-        jFramePreview.setBorder(javax.swing.BorderFactory.createTitledBorder("Window"));
+        jFramePreview.setBorder(javax.swing.BorderFactory.createTitledBorder("Preview"));
+        jFramePreview.setLayout(new javax.swing.BoxLayout(jFramePreview, javax.swing.BoxLayout.LINE_AXIS));
 
-        javax.swing.GroupLayout jFramePreviewLayout = new javax.swing.GroupLayout(jFramePreview);
-        jFramePreview.setLayout(jFramePreviewLayout);
-        jFramePreviewLayout.setHorizontalGroup(
-            jFramePreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 779, Short.MAX_VALUE)
-        );
-        jFramePreviewLayout.setVerticalGroup(
-            jFramePreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jBttnSaveFormat.setText("\"Save Format\"");
+        jBttnLoadFormats.setText("Load Formats");
+        jBttnLoadFormats.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBttnLoadFormatsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jFramePrintLayout = new javax.swing.GroupLayout(jFramePrint);
         jFramePrint.setLayout(jFramePrintLayout);
@@ -246,7 +221,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
                         .addComponent(jLblFormatType, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCBFormats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jBttnSaveFormat, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBttnLoadFormats, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBttnPrintSave, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jFramePreview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -262,7 +237,7 @@ public class ReportCardProUI extends javax.swing.JFrame {
                     .addComponent(jLblFormatType)
                     .addComponent(jCBFormats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jBttnSaveFormat)
+                .addComponent(jBttnLoadFormats)
                 .addContainerGap(146, Short.MAX_VALUE))
             .addGroup(jFramePrintLayout.createSequentialGroup()
                 .addContainerGap()
@@ -336,65 +311,76 @@ public class ReportCardProUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initComponentNames(Component object) { // not sure if this could really be automated
-        if (object instanceof JTextComponent) {
-            object.setName(((JTextComponent)(object)).getText());
+        if (object instanceof JTextComponent) { // if the object is a text component
+            object.setName(((JTextComponent)(object)).getText()); // set the "name" of the box to it's current text (on initialization)
         }
-        if (object instanceof Container) {
+        if (object instanceof Container) { // if it can have children
             try {
-                Component[] objects = ((Container)(object)).getComponents();
-                for (Component object1 : objects) {
-                    initComponentNames(object1);
+                Component[] objects = ((Container)(object)).getComponents(); // get the children
+                for (Component object1 : objects) { // for each child
+                    initComponentNames(object1); // run this code for the child
                 }
             } catch (Exception e) {}
         }
     }
     
-    public String dataPath = "";
+    public String dataPath = ""; // the path to the data folder
     
-    private String queryDataPath() {
+    private String queryDataPath() { // asks the user for the data folder
         JOptionPane.showMessageDialog(null,"Please select the folder where your data is stored.","Data Path Unspecified",1);
         JFileChooser fc = new JFileChooser("");
-        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        if (fc.showOpenDialog(null) ==  JFileChooser.APPROVE_OPTION) {
-            return fc.getSelectedFile().getAbsolutePath();
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); // only allow folders
+        if (fc.showOpenDialog(null) ==  JFileChooser.APPROVE_OPTION) { // if selected and accepted
+            return fc.getSelectedFile().getAbsolutePath(); // return the path to the selected file
+        }
+        return "";
+    }
+    
+    private String queryFormatPath() { // asks the user for the format folder
+        JOptionPane.showMessageDialog(null,"Please select the folder where your formatting files are stored.","Format Path Unspecified",1);
+        JFileChooser fc = new JFileChooser("");
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); // only allow folders
+        if (fc.showOpenDialog(null) ==  JFileChooser.APPROVE_OPTION) { // if selected and accepted
+            return fc.getSelectedFile().getAbsolutePath(); // return the path to the selected file
         }
         return "";
     }
     
     private String[][] returnContents(Component object) { // this whole function has some nasty typecasting, but it should work
-        ArrayList<String> exportContent  = new ArrayList<>();
-        ArrayList<String> exportName  = new ArrayList<>();
+        // returns an array containing two arrays, one of the variable names, and the other of their values
+        ArrayList<String> exportContent  = new ArrayList<>(); // create an arraylist for the variable values
+        ArrayList<String> exportName  = new ArrayList<>(); // create an arraylist for the variable names
         
-        if (object instanceof JTextComponent) {
-            exportName.add(((JTextComponent)(object)).getName());
-            exportContent.add(((JTextComponent)(object)).getText());
+        if (object instanceof JTextComponent) { // if the object is a text box
+            exportName.add(((JTextComponent)(object)).getName()); // add it's name to the first arraylist
+            exportContent.add(((JTextComponent)(object)).getText()); // add the text in it to the second arraylist
             //System.out.println(((JTextComponent)(object)).getName());
         }
-        if (object instanceof Container) {
-            Component[] objects = ((Container)(object)).getComponents();
-            for (Component object1 : objects) {
-                String[][] inFeed = returnContents(object1);
-                for (int y = 0; y < inFeed[0].length; y++) {
-                    exportName.add(inFeed[0][y]);
-                    exportContent.add(inFeed[1][y]);
+        if (object instanceof Container) { // if the object can have children
+            Component[] objects = ((Container)(object)).getComponents(); // get the children
+            for (Component object1 : objects) { // for each child
+                String[][] inFeed = returnContents(object1); // run this function on the child
+                for (int y = 0; y < inFeed[0].length; y++) { // for each variable in the child
+                    exportName.add(inFeed[0][y]); // add the name to the list
+                    exportContent.add(inFeed[1][y]); // add the value to the list
                 }
             }
         }
-    String[][] output = new String[2][exportContent.size()];
-    if (exportContent.isEmpty()) {
+    String[][] output = new String[2][exportContent.size()]; // make an array based on the size of the arraylist
+    if (exportContent.isEmpty()) { // if it's empty, return the empty array
         return output;
     }
     
-    System.out.println(output.length);
-    System.out.println(output[0].length);
-    System.out.println(output[1].length);
-    for (int x = 0; x < exportName.size(); x++) {
+    //System.out.println(output.length);
+    //System.out.println(output[0].length);
+    //System.out.println(output[1].length);
+    for (int x = 0; x < exportName.size(); x++) { // add the names to the array
         output[0][x] = exportName.get(x);
-        System.out.println(output[0][x]);
+        //System.out.println(output[0][x]);
     }
-    for (int x = 0; x < exportContent.size(); x++) {
+    for (int x = 0; x < exportContent.size(); x++) { // add the values to the array
         output[1][x] = exportContent.get(x);
-        System.out.println(output[1][x]);
+        //System.out.println(output[1][x]);
     }
     return output;  
     }
@@ -410,50 +396,62 @@ public class ReportCardProUI extends javax.swing.JFrame {
         // check if file exists, prompt user if does
         String studentID = jTFID.getText();
         File studentFile = new File(dataPath, studentID + ".csv");
-        if (studentFile.canRead()) {
+        if (studentFile.canRead()) { // if the file already exists
            if (JOptionPane.showConfirmDialog(null,"Would you like to overwrite the existing file?","File Already Exists",1) == javax.swing.JOptionPane.NO_OPTION) {
-               return;
+               return; // if the user does not want to overwrite, exit
            } 
-        } else {
+        } else { // if file can't be read, make a new file
             try {
                 studentFile.createNewFile();
             } catch (IOException ex) {
                 Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        String[][] variables = returnContents(jFrameInput);
+        String[][] variables = returnContents(jFrameInput); // get current variables
         PrintWriter fileOut = null;
         try {
-            fileOut = new PrintWriter(studentFile);
+            fileOut = new PrintWriter(studentFile); // make a new writer to the file
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         String line = "";
         
-        for (String variable : variables[0]) {
-            System.out.println(variable);
+        for (String variable : variables[0]) { // for each line in the names, add it to the string
+            //System.out.println(variable);
             line = line.concat(variable + ",");
         }
         
-        fileOut.println(line);
+        fileOut.println(line); // write the name line to the file
         
-        line = "";
+        line = ""; // wipe the line variable
         
-        for (String variable : variables[1]) {
-            System.out.println(variable);
+        for (String variable : variables[1]) { // for each line in the values, add it ot the string
+            //System.out.println(variable);
             line = line.concat(variable + ",");
         }
         
-        fileOut.println(line);
+        fileOut.println(line); // write the values line to the file
         fileOut.close();
-        System.out.println(dataPath);
+        //System.out.println(dataPath);
     }//GEN-LAST:event_jBttnSaveActionPerformed
 
-    private int curIncrement = 0; // TODO: make this based on the total number of active classes displayed
+    private int curIncrement = 0; // the current number of classes
     
-    private String incrementString(String in) {
+    private void reloadCurIncrement() { // recalculates the number of classes
+        int runningIncrement = 0;
+        Component[] children = jFrameInput.getComponents(); // get the children of the input frame
+        for (Component child1 : children) { // for each child of the input frame
+            if (child1 instanceof JPanel) { // if it is a jpanel (class), increment by 1
+                runningIncrement++;
+            }
+        }
+        curIncrement = runningIncrement;
+    }
+    
+    private String incrementString(String in) { // changes the number on a string, or adds a number if not present
+        reloadCurIncrement();
         //System.out.println(in);
-        if (in == null || in.isEmpty()) {
+        if (in == null || in.isEmpty()) { // if it's empty, return just the number
             //return "1";
             return Integer.toString(curIncrement);
         }
@@ -463,34 +461,37 @@ public class ReportCardProUI extends javax.swing.JFrame {
         }
 */
         int readerPos = in.length();
-        while (readerPos > -1) {
+        while (readerPos > -1) { // while there's still a character to read
             readerPos--;
-            if (!Character.isDigit(in.charAt(readerPos))) {
+            if (!Character.isDigit(in.charAt(readerPos))) { // if the character is not a digit, break at the last character position
                 readerPos++;
                 break;
             }
         }
-        int curValue = Integer.parseInt(in.substring(readerPos));
-        String shavedString = in.substring(0,readerPos);
+        int curValue = Integer.parseInt(in.substring(readerPos)); // get the number from the string
+        String shavedString = in.substring(0,readerPos); // get the string without the number
         //return shavedString + Integer.toString(curValue++);
-        return shavedString + Integer.toString(curIncrement);
+        return shavedString + Integer.toString(curIncrement); // return the string with the new number
     }
     
     
     
-    private Object deepIncrementName(Object in) {
-        if (in instanceof Container) {
-            Component[] children = ((Container)(in)).getComponents();
-            for (Component child1 : children) {
+    private Object deepIncrementName(Object in) { // change the number on the object and all of it's children
+        if (in instanceof Container) { // if the object can have children
+            Component[] children = ((Container)(in)).getComponents(); // get children
+            for (Component child1 : children) { // for each child, run the function
                 Object returnedChild = deepIncrementName(child1);
                 ((Container) in).remove(child1);
                 ((Container) in).add((Component)(returnedChild));
             }
         }
-        if (in instanceof Component) {  
+        if (in instanceof JButton) { // not good for a generic function, but the best place to put it for now
+            ((JButton)(in)).setEnabled(true); // if the object is a button, enable it
+        }
+        if (in instanceof Component) {  // if the object is a component, increment it's name
             Component inC = (Component)(in);
             inC.setName(incrementString(inC.getName()));
-            if (inC instanceof JTextField) {
+            if (inC instanceof JTextField) { // if the object is a text box, set it's text and tooltip to it's name
                 JTextField inTF = (JTextField)(inC);
                 inTF.setToolTipText(inTF.getName());
                 inTF.setText(inTF.getName());
@@ -501,14 +502,14 @@ public class ReportCardProUI extends javax.swing.JFrame {
         return in;
     }
     
-    private Object deepCopyUI(Object in) throws IOException, ClassNotFoundException {
+    private Object deepCopyUI(Object in) throws IOException, ClassNotFoundException { // a simple deep copy of an object
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(bao);
-        oos.writeObject(in);
+        oos.writeObject(in); // write the object to an object output stream
         
         ByteArrayInputStream bai = new ByteArrayInputStream(bao.toByteArray());
         ObjectInputStream ois = new ObjectInputStream(bai);
-        Object copied = ois.readObject();
+        Object copied = ois.readObject(); // read in the new object from the object stream
         return copied;
     }
     
@@ -528,6 +529,56 @@ public class ReportCardProUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jBttnAddClassActionPerformed
 
+    private boolean searchPropertyFile(File fileIn, String propertyName, String propertyValue) throws FileNotFoundException { // checks if a property has a value in a ".csv" file
+        Scanner in = new Scanner(fileIn); // load file
+        if (!in.hasNextLine()) { // if it doesn't have another line, return false
+            return false;
+        }
+        String line = in.nextLine(); // get the next line
+        if (!in.hasNextLine()) { // check if the other line exists before computing, return false
+            return false;
+        }
+        String[] splitLine = line.split(","); // split it into the array
+        int position = -1;
+        for (int x = 0; x < splitLine.length; x++) { // for every property in the array, check if it is the one requested
+            if (splitLine[x].equals(propertyName)) {
+                position = x;
+                break;
+            }
+        }
+        if (position < 0) { // if the property isn't in the array, return false
+            return false;
+        }
+        line = in.nextLine();
+        splitLine = line.split(",");
+        return splitLine[position].equals(propertyValue); // if the value is the one requested, return true
+    }
+    
+    private int listContains(String value, String[] list) { // checking if an array of strings has a string
+        for (int x = 0; x < list.length; x++) { // simple linear search, could possibly be optimized if the list was sorted
+            if (list[x].equals(value)) {
+                return x;
+            }
+        }
+        return -1;
+    }
+    
+    private void deepLoadSearch(Object in, String[] names, String[] values) { // given an object, iterate through all children and apply values to them if name matches
+        if (in instanceof JTextComponent) { // if the object is a text box
+            try { // if the name of the text box is in the list of names, set it's text to the values
+                ((JTextComponent)(in)).setText(values[listContains(((JTextComponent)(in)).getName(),names)]); 
+            } catch (IndexOutOfBoundsException e) {}
+        }
+        if (in instanceof Container) { // if the object can have children
+            try {
+                Component[] objects = ((Container)(in)).getComponents(); // get children
+                for (Component object1 : objects) { // for each child
+                    deepLoadSearch(object1, names, values); // run the function
+                }
+            } catch (Exception e) {}
+        }
+    }
+    
     private void jBttnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnLoadActionPerformed
         // query data path
         if (dataPath.isEmpty()) {
@@ -540,29 +591,209 @@ public class ReportCardProUI extends javax.swing.JFrame {
         // request student name or ID
         String[] choices = {"Student Name","ID","Search by Property"};
         int x = JOptionPane.showOptionDialog(null, "Please specify lookup type.", "Lookup Type", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
-        File studentFile;
-        switch (x) {
+        File studentFile = null;
+        switch (x) { // the buttons on the dialog box
             case 0:
                 //student name lookup
-                
+                String studentName = JOptionPane.showInputDialog("Please Input Student Last Name");
+                boolean fileFound1 = false;
+                for (File checkedFile : new File(dataPath).listFiles()) { // for each file in the data folder
+                    try {
+                        fileFound1 = searchPropertyFile(checkedFile,"Last Name",studentName); // if the last name is correct, move on, else exit
+                    } catch(FileNotFoundException e) {}
+                    if (fileFound1) {
+                        studentFile = checkedFile;
+                        break;
+                    }
+                }
+                if (!fileFound1) {
+                    return;
+                }
+                break;
             case 1:
                 // ID lookup
                 String studentID = JOptionPane.showInputDialog("Please Input Student ID");
                 studentFile = new File(dataPath, studentID + ".csv");
-                if (!studentFile.canRead()) {
+                if (!studentFile.canRead()) { // if the file can't be read, exit
                     JOptionPane.showMessageDialog(null, "File not found.");
                     return;
                 } 
+                break;
             case 2:
                 // property lookup
+                String propertyName = JOptionPane.showInputDialog("Please Input The Name of the Type to search by");
+                String propertyValue = JOptionPane.showInputDialog("Please Input the Value to search for");
+                boolean fileFound2 = false;
+                for (File checkedFile : new File(dataPath).listFiles()) { // for each file in the data folder
+                    try {
+                        fileFound2 = searchPropertyFile(checkedFile,propertyName,propertyValue); // if the property is the right value, move on, else exit
+                    } catch(FileNotFoundException e) {}
+                    if (fileFound2) {
+                        studentFile = checkedFile;
+                        break;
+                    }
+                }
+                if (!fileFound2) {
+                    return;
+                }
+                break;
+        }
+        if (studentFile == null || !studentFile.canRead()) { // if file doesn't exist, exit
+            System.err.println("Student File cannot be Read or doesn't exist!");
+            return;
         }
         // load file into scanner
-        // first five inputs of each line will ALWAYS be the non-class variables.
-        // read in first line, ensure that all required fields exist
-        // read in second line, directly correlating it with the first 
-        // ( Extra data in the first line will be added as blank fields, extra data in the second line will be discarded)
-        // exit after second line is read, subsequint lines are not able to be understood
+        Scanner fileIn = null;
+        try {
+            fileIn = new Scanner(studentFile);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        String line = fileIn.nextLine();
+        String[] variableNames = line.split(","); // read in first line
+        line = fileIn.nextLine();
+        String[] variableValues = line.split(","); // read in second line, directly correlating it with the first
+        fileIn.close(); // exit after second line is read, subsequint lines are not able to be understood
+        
+        reloadCurIncrement();
+        int classDifference = ((variableNames.length - 5) / 6) - curIncrement;
+        for (int j = 0; j < classDifference; j++) {  // for every class that is needed, add a new class
+            jBttnAddClassActionPerformed(new ActionEvent(this,0,""));
+        }
+        deepLoadSearch(jFrameInput,variableNames,variableValues);
     }//GEN-LAST:event_jBttnLoadActionPerformed
+
+    public String formatPath = null;
+    
+    public String curFormat = null;
+    
+    public File loadedFormatFile = null;
+    
+    private void jBttnPrintSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnPrintSaveActionPerformed
+    try {
+            Desktop.getDesktop().print(loadedFormatFile); // ask the desktop to print the file
+        } catch (IOException ex) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBttnPrintSaveActionPerformed
+
+    private void jBttnLoadFormatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnLoadFormatsActionPerformed
+        // ask for format path
+        formatPath = queryFormatPath();
+        // search folder for all .html types, load into format list
+        jCBFormats.removeAllItems();
+        for (File checkedFile : new File(formatPath).listFiles()) { // for each file
+            if (checkedFile.getPath().endsWith(".html")) { // if it ends with .html, add to list
+                jCBFormats.addItem(checkedFile.getName());
+            }
+        }
+    }//GEN-LAST:event_jBttnLoadFormatsActionPerformed
+
+    private void jCBFormatsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBFormatsItemStateChanged
+        if (!(evt.getStateChange() == java.awt.event.ItemEvent.SELECTED)) { //  if it's not the right kind of event, ignore it
+            return;
+        }
+        Object item = evt.getItem(); // get the selected item
+        if (!(item instanceof String)) { // if it's not a string, exit
+            return;
+        }
+        curFormat = ((String)(item));
+        // load the file
+        File loadFile = null;
+        try {
+            loadFile = new File(formatPath + curFormat + ".html"); // try and load the named file
+        } catch (Exception ex) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        // make a temp file
+        File tempFile = null;
+        try {
+            tempFile = File.createTempFile(curFormat,".html"); // make a temp file to modify
+        } catch (IOException ex) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        // edit the temp file to have all the variables in it
+        try {
+            String readFile = new String(Files.readAllBytes(tempFile.toPath()), StandardCharsets.UTF_8); // read in the file
+            String[][] variables = returnContents(jFrameInput);
+            for (int x = 0; x < variables[0].length; x++) { // for each variable
+                readFile = readFile.replaceAll(variables[0][x], variables[1][x]); // replace it in the file
+            }
+            Files.write(tempFile.toPath(), readFile.getBytes(StandardCharsets.UTF_8)); // write the new file to the file
+        } catch (IOException ex) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        loadedFormatFile = tempFile;
+        
+        // load temp file to window
+        JEditorPane jep = new JEditorPane();
+         jep.setEditable(false);   
+
+         try {
+           jep.setPage(loadedFormatFile.toURI().toURL()); // load the html into the preview
+         }
+         catch (IOException e) {
+           jep.setContentType("text/html");
+           jep.setText("<html>Could not display Format</html>");
+         } 
+
+         JScrollPane scrollPane = new JScrollPane(jep);
+         jFramePreview.removeAll();
+         jFramePreview.add(scrollPane); // add it and reload
+         jFramePreview.revalidate();
+         jFramePreview.repaint();
+        // TODO: cleanup temp file when no longer in use?
+    }//GEN-LAST:event_jCBFormatsItemStateChanged
+
+    private ArrayList<String> rawScripts = new ArrayList<String>();
+    
+    private int scriptCount = 0;
+    
+    private void jBttnAddScriptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnAddScriptActionPerformed
+        JOptionPane.showMessageDialog(null,"Please select the script to load.","Select Script",1);
+        JFileChooser fc = new JFileChooser("");
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        if (!(fc.showOpenDialog(null) ==  JFileChooser.APPROVE_OPTION)) { // if not accepted, exit
+            return;
+        }
+        File script = new File(fc.getSelectedFile().getAbsolutePath()); // get the file the user specify
+        
+        try {
+            rawScripts.add(new String(Files.readAllBytes(script.toPath()), StandardCharsets.UTF_8)); // load in the file
+        } catch (IOException IOException) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, IOException);
+        }
+        
+        JPanel copy = null;
+        
+        try {
+            copy = (JPanel)(deepCopyUI(jFrameScript0));
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        scriptCount++;
+        copy = (JPanel)(deepIncrementName(copy));
+        TitledBorder border = (TitledBorder)(copy.getBorder()); // set the border name to the file's name
+        border.setTitle(script.getName());
+        copy.setBorder(border);
+        jFrameProcess.add(copy); // not sure if all 3 of these are needed, probably good to be safe
+        jFrameProcess.revalidate();
+        jFrameProcess.repaint();
+        
+        ScriptEngineManager sem = new ScriptEngineManager();
+        ScriptEngine engine = sem.getEngineByName("nashorn");
+        // pass in all current variables
+        try {
+            engine.eval(rawScripts.get(scriptCount - 1));
+        } catch (ScriptException ex) {
+            Logger.getLogger(ReportCardProUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // pass out all variables
+    }//GEN-LAST:event_jBttnAddScriptActionPerformed
 
     /**
      * @param args the command line arguments
@@ -597,11 +828,11 @@ public class ReportCardProUI extends javax.swing.JFrame {
     private javax.swing.JButton jBttnAddClass;
     private javax.swing.JButton jBttnAddScript;
     private javax.swing.JButton jBttnLoad;
+    private javax.swing.JButton jBttnLoadFormats;
     private javax.swing.JButton jBttnPrintSave;
     private javax.swing.JButton jBttnRemove0;
     private javax.swing.JButton jBttnRunSN;
     private javax.swing.JButton jBttnSave;
-    private javax.swing.JButton jBttnSaveFormat;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCBFormats;
     private javax.swing.JPanel jFrameClass0;
@@ -609,10 +840,10 @@ public class ReportCardProUI extends javax.swing.JFrame {
     private javax.swing.JPanel jFramePreview;
     private javax.swing.JPanel jFramePrint;
     private javax.swing.JPanel jFrameProcess;
+    private javax.swing.JPanel jFrameScript0;
     private javax.swing.JPanel jFrameTop;
     private javax.swing.JLabel jLblFormatType;
     private javax.swing.JLabel jLblTitle;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTFAttendance0;
     private javax.swing.JTextField jTFAverage;
     private javax.swing.JTextField jTFAverage0;
